@@ -417,4 +417,7 @@
   .process-v-content h3 { font-size: 17px !important; }
   
   .types-grid[style*="max-width"] { max-width: 100% !important; }
+  .types-grid[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  .why-grid[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+  .types-grid, .why-grid { max-width: 100% !important; }
 }
