@@ -383,4 +383,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   .divider-text{font-size:clamp(40px,12vw,80px)!important;letter-spacing:-2px!important;-webkit-text-stroke:1px rgba(255,255,255,.18)!important}
   .pricing-card{min-height:auto}
   .pricing-header{min-height:auto}
+  
+  /* Preloader mobile */
+  .preloader-letters{flex-wrap:wrap;justify-content:center;padding:0 16px}
+  .preloader-letter{font-size:clamp(32px,10vw,60px)!important}
+  .preloader-letter.space{width:100%!important;height:4px}
+  .preloader-sub{flex-wrap:wrap;justify-content:center;gap:12px;padding:0 16px}
+  .preloader-sub-word{font-size:11px!important;letter-spacing:2px!important}
+  .preloader-counter{font-size:clamp(36px,10vw,60px)!important;bottom:24px;right:24px}
 }
