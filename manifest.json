@@ -1,0 +1,17 @@
+{
+  "name": "Weboost Studio",
+  "short_name": "Weboost",
+  "description": "Création de sites internet professionnels dans le Golfe de Saint-Tropez. Développeur web freelance, SEO local, Var 83.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#4f46e5",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "https://www.weboost-studio.fr/logo-new.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# ============================================
+# WEBOOST STUDIO — robots.txt
+# ============================================
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.weboost-studio.fr/sitemap.xml
+
+# Bloquer les dossiers non nécessaires au crawl
+Disallow: /assets/js/
+Disallow: /assets/fonts/
