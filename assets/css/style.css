@@ -371,7 +371,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   .nav-toggle{display:flex}
   .nav-mobile{display:flex}
   .services-grid,.pricing-grid,.portfolio-grid,.process-steps{grid-template-columns:1fr}
-  .hero-title{letter-spacing:-2px}
+  .hero-title{letter-spacing:-2px;font-size:clamp(36px,9vw,52px)!important;word-break:break-word;overflow-wrap:break-word}
+  .hero-title .stroke{-webkit-text-stroke:1.5px var(--text)}
   .hero-btns{flex-direction:column;width:100%}
   .hero-btns .btn{width:100%;justify-content:center}
   .form-row{grid-template-columns:1fr}
