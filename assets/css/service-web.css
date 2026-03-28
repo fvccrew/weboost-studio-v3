@@ -402,4 +402,19 @@
   .process-v-step::before { display: none; }
   .process-v-step { flex-direction: column; gap: 12px; }
   .process-v-num { font-size: 40px; }
+
+  /* Fix débordement titres mobile */
+  .why-card h3,
+  .feature-card h3,
+  .type-card h3,
+  .process-v-content h3,
+  .process-step h3,
+  .faq-question h3 { word-break: break-word; overflow-wrap: break-word; font-size: 16px !important; }
+  
+  .section-title { word-break: break-word; overflow-wrap: break-word; font-size: clamp(28px, 7vw, 42px) !important; letter-spacing: -1px !important; }
+  
+  .type-card h3 { font-size: 17px !important; }
+  .process-v-content h3 { font-size: 17px !important; }
+  
+  .types-grid[style*="max-width"] { max-width: 100% !important; }
 }
