@@ -401,3 +401,39 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   .preloader-sub-word{font-size:11px!important;letter-spacing:2px!important}
   .preloader-counter{font-size:clamp(36px,10vw,60px)!important;bottom:24px;right:24px}
 }
+
+/* ===================== COOKIE BANNER ===================== */
+.cookie-banner{
+  position:fixed;bottom:0;left:0;right:0;z-index:9000;
+  background:rgba(10,10,10,0.95);backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:20px var(--px);
+  display:none;
+  animation:cookieSlideUp .5s ease-out;
+}
+.cookie-banner.show{display:block}
+@keyframes cookieSlideUp{
+  from{transform:translateY(100%);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.cookie-inner{
+  max-width:var(--container);margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  flex-wrap:wrap;
+}
+.cookie-text{flex:1;min-width:280px}
+.cookie-text p{font-size:13px;color:var(--text-muted);line-height:1.6;margin:0}
+.cookie-text a{color:var(--accent-light);text-decoration:underline}
+.cookie-text strong{color:var(--text);font-size:14px}
+.cookie-btn{
+  font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  background:var(--accent);color:var(--white);
+  padding:12px 28px;border-radius:6px;cursor:pointer;
+  border:none;font-family:var(--font-body);
+  transition:background .3s;flex-shrink:0;
+}
+.cookie-btn:hover{background:var(--accent-light)}
+@media(max-width:768px){
+  .cookie-inner{flex-direction:column;text-align:center}
+  .cookie-btn{width:100%}
+}

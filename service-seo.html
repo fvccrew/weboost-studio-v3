@@ -472,5 +472,19 @@
 <script src="assets/js/ScrollToPlugin.min.js"></script>
 <script src="assets/js/main.js"></script>
 
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <p><strong>🍪 Cookies</strong></p>
+      <p>Ce site utilise uniquement des cookies techniques essentiels au bon fonctionnement (navigation, mémorisation de vos préférences). Aucun cookie de tracking, publicité ou analyse n'est utilisé. Vos données ne sont pas transmises à des tiers. <a href="politique-confidentialite.html">En savoir plus</a></p>
+    </div>
+    <button class="cookie-btn" onclick="acceptCookies()">Accepter</button>
+  </div>
+</div>
+<script>
+function acceptCookies(){document.getElementById("cookieBanner").style.display="none";localStorage.setItem("cookieAccepted","1")}
+if(!localStorage.getItem("cookieAccepted")){document.addEventListener("DOMContentLoaded",function(){setTimeout(function(){document.getElementById("cookieBanner").classList.add("show")},2000)})}
+</script>
 </body>
 </html>
