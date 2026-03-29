@@ -222,7 +222,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .btn:hover .arrow{transform:translateX(4px)}
 
 /* ===================== MARQUEE ===================== */
-.marquee-block{padding:16px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);contain:content}
+.marquee-block{padding:16px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .marquee-row{display:flex;white-space:nowrap;will-change:transform;transform:translateZ(0)}
 .marquee-text{
   font-family:var(--font-heading);font-size:clamp(50px,11vw,130px);
@@ -235,7 +235,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .marquee-text.accent-soft{color:var(--accent-light);opacity:.3}
 
 /* Section divider */
-.section-divider{overflow:hidden;padding:20px 0;contain:content}
+.section-divider{overflow:hidden;padding:20px 0}
 .divider-text{
   font-family:var(--font-heading);font-size:clamp(80px,15vw,220px);
   font-weight:900;text-transform:uppercase;letter-spacing:-6px;
@@ -244,7 +244,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 }
 
 /* ===================== SECTIONS ===================== */
-.section{padding:clamp(80px,12vh,160px) 0;position:relative;content-visibility:auto;contain-intrinsic-size:auto 800px}
+.section{padding:clamp(80px,12vh,160px) 0;position:relative}
 .section-head{margin-bottom:64px}
 .section-num{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent-light);margin-bottom:16px;display:inline-flex;align-items:center;gap:12px}
 .section-num .ln{width:24px;height:1.5px;background:var(--accent)}
