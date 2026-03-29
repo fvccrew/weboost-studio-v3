@@ -481,7 +481,7 @@
         </div>
         <div class="field"><label for="message">Votre message</label><textarea id="message" name="message" placeholder="Décrivez votre projet, vos objectifs..."></textarea></div>
         <button type="submit" class="btn btn-fill" id="submitBtn" style="width:fit-content">Envoyer le message <span class="arrow">→</span></button>
-        <div id="formFeedback" style="display:none;margin-top:16px;padding:16px 20px;border-radius:8px;font-size:14px;font-weight:500"></div>
+        <div id="formFeedback" style="display:none;margin-top:16px;padding:16px 20px;border-radius:8px;font-size:14px;font-weight:500;transition:opacity 0.5s"></div>
       </form>
       <div class="contact-info">
         <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:contact@weboost-studio.fr">contact@weboost-studio.fr</a></div></div></div>
@@ -555,6 +555,7 @@ if (form) {
         feedback.style.border = '1px solid rgba(34,197,94,0.3)';
         feedback.textContent = data.message;
         form.reset();
+        setTimeout(() => { feedback.style.opacity = '0'; setTimeout(() => { feedback.style.display = 'none'; feedback.style.opacity = '1'; }, 500); }, 5000);
       } else {
         feedback.style.background = 'rgba(239,68,68,0.15)';
         feedback.style.color = '#ef4444';
