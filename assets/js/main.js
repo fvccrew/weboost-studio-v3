@@ -410,17 +410,6 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollTrigger: { trigger: step, start: 'top 88%', once: true },
       opacity: 0, y: 60, scale: 0.95, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
     });
-    // Number counter
-    const num = step.querySelector('.process-step-num');
-    if (num) {
-      const val = parseInt(num.textContent);
-      gsap.from(num, {
-        scrollTrigger: { trigger: step, start: 'top 88%', once: true },
-        innerText: 0, duration: 1.5, snap: { innerText: 1 }, ease: 'power2.out',
-        delay: i * 0.1,
-        onUpdate: function () { num.textContent = '0' + Math.round(parseFloat(num.textContent)); }
-      });
-    }
   });
 
   // ========== PRICING CARDS ==========
