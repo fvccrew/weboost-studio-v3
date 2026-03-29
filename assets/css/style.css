@@ -206,7 +206,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .hero-content{position:relative;z-index:2}
 .hero-eyebrow{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:4px;color:var(--accent-light);margin-bottom:24px;display:flex;align-items:center;gap:14px;opacity:0}
 .hero-eyebrow .dash{width:32px;height:1.5px;background:var(--accent)}
-.hero-title{font-family:var(--font-heading);font-size:clamp(52px,10vw,140px);font-weight:900;line-height:.9;text-transform:uppercase;letter-spacing:-4px;margin-bottom:40px}
+.hero-title{font-family:var(--font-heading);font-size:clamp(40px,7vw,100px);font-weight:900;line-height:1.1;text-transform:uppercase;letter-spacing:-3px;margin-bottom:40px}
 .hero-title .line{display:block;overflow:hidden;padding-bottom:6px}
 .hero-title .line-inner{display:inline-block;transform:translateY(115%);will-change:transform}
 .hero-title .stroke{-webkit-text-stroke:2px var(--text);color:transparent}
@@ -222,8 +222,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .btn:hover .arrow{transform:translateX(4px)}
 
 /* ===================== MARQUEE ===================== */
-.marquee-block{padding:16px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.marquee-row{display:flex;white-space:nowrap;will-change:transform}
+.marquee-block{padding:16px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);contain:content}
+.marquee-row{display:flex;white-space:nowrap;will-change:transform;transform:translateZ(0)}
 .marquee-text{
   font-family:var(--font-heading);font-size:clamp(50px,11vw,130px);
   font-weight:900;text-transform:uppercase;letter-spacing:-3px;line-height:1.1;
@@ -235,7 +235,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .marquee-text.accent-soft{color:var(--accent-light);opacity:.3}
 
 /* Section divider */
-.section-divider{overflow:hidden;padding:20px 0}
+.section-divider{overflow:hidden;padding:20px 0;contain:content}
 .divider-text{
   font-family:var(--font-heading);font-size:clamp(80px,15vw,220px);
   font-weight:900;text-transform:uppercase;letter-spacing:-6px;
@@ -244,24 +244,24 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 }
 
 /* ===================== SECTIONS ===================== */
-.section{padding:clamp(80px,12vh,160px) 0;position:relative}
+.section{padding:clamp(80px,12vh,160px) 0;position:relative;content-visibility:auto;contain-intrinsic-size:auto 800px}
 .section-head{margin-bottom:64px}
 .section-num{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent-light);margin-bottom:16px;display:inline-flex;align-items:center;gap:12px}
 .section-num .ln{width:24px;height:1.5px;background:var(--accent)}
-.section-title{font-family:var(--font-heading);font-size:clamp(36px,5.5vw,72px);font-weight:900;text-transform:uppercase;letter-spacing:-2px;line-height:.95}
+.section-title{font-family:var(--font-heading);font-size:clamp(36px,5.5vw,72px);font-weight:900;text-transform:uppercase;letter-spacing:-2px;line-height:1.1}
 .section-title .thin{font-weight:300;-webkit-text-stroke:1.5px var(--text);color:transparent}
 .section-sub{font-size:17px;color:var(--text-muted);max-width:500px;margin-top:20px;line-height:1.7}
 
 /* ===================== SERVICES ===================== */
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
-.service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:36px 28px;position:relative;overflow:hidden;transition:transform .5s var(--ease),border-color .3s,background .3s;display:flex;flex-direction:column}
+.service-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:36px 28px;position:relative;overflow:hidden;transition:transform .5s var(--ease),border-color .3s,background .3s;display:flex;flex-direction:column;will-change:transform;transform:translateZ(0)}
 .service-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
 .service-card:hover{transform:translateY(-8px);border-color:var(--border-hover);background:var(--bg-card-hover)}
 .service-card:hover::after{transform:scaleX(1)}
 .service-icon{width:52px;height:52px;border-radius:12px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:22px}
 .service-card h3{font-family:var(--font-heading);font-size:20px;font-weight:700;margin-bottom:10px}
 .service-card p{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:18px;flex:1}
-.service-price{font-size:13px;font-weight:600;color:var(--accent-light)}
+.service-price{font-size:13px;font-weight:600;color:var(--accent-light);margin-bottom:16px}
 .service-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--accent-light);margin-top:auto;text-transform:uppercase;letter-spacing:1px;padding:10px 18px;border:1px solid rgba(79,70,229,.3);border-radius:6px;background:var(--accent-glow);transition:gap .3s,border-color .3s,background .3s}
 .service-link:hover{gap:14px;border-color:var(--accent);background:rgba(79,70,229,.2)}
 
@@ -371,7 +371,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   .nav-toggle{display:flex}
   .nav-mobile{display:flex}
   .services-grid,.pricing-grid,.portfolio-grid,.process-steps{grid-template-columns:1fr}
-  .hero-title{letter-spacing:-2px;font-size:clamp(36px,9vw,52px)!important;word-break:break-word;overflow-wrap:break-word}
+  .hero-title{letter-spacing:-1.5px;font-size:clamp(30px,8vw,44px)!important;word-break:break-word;overflow-wrap:break-word}
   .hero-title .stroke{-webkit-text-stroke:1.5px var(--text)}
   .section-title{font-size:clamp(28px,7vw,42px)!important;letter-spacing:-1px!important;word-break:break-word;overflow-wrap:break-word}
   .section-title .thin{-webkit-text-stroke:1px var(--text)}

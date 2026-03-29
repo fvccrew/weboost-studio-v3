@@ -308,17 +308,18 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.marquee-row').forEach(row => {
     const isReverse = row.classList.contains('reverse');
     const clone = row.innerHTML;
-    row.innerHTML += clone; // duplicate for seamless
+    row.innerHTML += clone;
 
     const totalW = row.scrollWidth / 2;
 
-    if (isReverse) gsap.set(row, { x: -totalW });
+    if (isReverse) gsap.set(row, { x: -totalW, force3D: true });
 
     const tween = gsap.to(row, {
       x: isReverse ? 0 : -totalW,
       duration: isReverse ? 28 : 32,
       ease: 'none',
       repeat: -1,
+      force3D: true,
     });
 
     // Velocity-reactive speed
@@ -359,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.utils.toArray('.reveal-up').forEach(el => {
     gsap.to(el, {
       scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', force3D: true,
     });
   });
 
@@ -384,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sCards.length) {
     gsap.from(sCards, {
       scrollTrigger: { trigger: '.services-grid', start: 'top 82%', once: true },
-      opacity: 0, y: 80, rotateX: 10, scale: 0.92,
+      opacity: 0, y: 80, rotateX: 10, scale: 0.92, force3D: true,
       duration: 0.8, stagger: 0.08, ease: 'power3.out',
       transformPerspective: 800,
     });
