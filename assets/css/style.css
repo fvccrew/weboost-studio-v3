@@ -402,6 +402,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   .preloader-counter{font-size:clamp(36px,10vw,60px)!important;bottom:24px;right:24px}
 }
 
+/* ===================== ZONES GRID INDEX ===================== */
+.zones-grid-index{grid-template-columns:repeat(3,1fr)!important;gap:16px}
+.zones-grid-index .service-card{padding:28px 22px}
+@media(max-width:768px){
+  .zones-grid-index{grid-template-columns:1fr!important}
+}
+
 /* ===================== COOKIE BANNER ===================== */
 .cookie-banner{
   position:fixed;bottom:0;left:0;right:0;z-index:9000;

@@ -17,7 +17,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 
 # ---- REDIRECTION zones.html → index.html#zones ----
-RewriteRule ^zones\.html$ /index.html#zones [R=301,L,NE]
+RewriteRule ^zones\.html$ / [R=301,L]
 
 # ---- PAGE D'ERREUR 404 PERSONNALISÉE ----
 ErrorDocument 404 /index.html
