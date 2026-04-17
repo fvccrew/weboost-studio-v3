@@ -9,9 +9,14 @@
   "lang": "fr",
   "icons": [
     {
-      "src": "https://www.weboost-studio.fr/logo-new.svg",
+      "src": "favicon.svg",
       "type": "image/svg+xml",
       "sizes": "any"
+    },
+    {
+      "src": "favicon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ]
 }

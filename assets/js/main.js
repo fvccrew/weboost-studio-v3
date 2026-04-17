@@ -10,9 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========== SMOOTH SCROLL (pure GSAP, no Lenis) ==========
   gsap.ticker.lagSmoothing(0);
 
-  // Force scroll to top on page load (fix back-navigation issues)
+  // Fix back-navigation scroll position issues
   window.history.scrollRestoration = 'manual';
-  window.scrollTo(0, 0);
 
   // Refresh ScrollTrigger after everything is loaded
   window.addEventListener('load', () => {
@@ -340,16 +339,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ========== DIVIDER TEXT — Pure CSS animation (no ScrollTrigger) ==========
-  document.querySelectorAll('.divider-text').forEach(text => {
-    const dir = text.dataset.dir === 'right' ? 1 : -1;
+  // ========== DIVIDER TEXT — Infinite scroll like marquees ==========
+  document.querySelectorAll('.section-divider').forEach(divider => {
+    const text = divider.querySelector('.divider-text');
+    if (!text) return;
+    const dir = text.dataset.dir === 'right' ? -1 : 1;
     
-    gsap.to(text, {
-      x: dir * -600,
-      duration: 5,
+    // Duplicate text for seamless loop
+    const clone = text.cloneNode(true);
+    clone.style.marginLeft = '60px';
+    divider.appendChild(clone);
+    
+    // Wrap both in a flex container
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;align-items:center;white-space:nowrap;will-change:transform;';
+    divider.innerHTML = '';
+    wrapper.appendChild(text);
+    wrapper.appendChild(clone);
+    divider.appendChild(wrapper);
+    
+    const totalW = wrapper.scrollWidth / 2;
+    
+    if (dir < 0) gsap.set(wrapper, { x: -totalW, force3D: true });
+    
+    gsap.to(wrapper, {
+      x: dir < 0 ? 0 : -totalW,
+      duration: 18,
       ease: 'none',
       repeat: -1,
-      yoyo: true,
       force3D: true,
     });
   });
@@ -359,34 +376,40 @@ document.addEventListener('DOMContentLoaded', () => {
     '.reveal-up, .section-num, .section-title, .service-card, .process-step, .pricing-card, .portfolio-item, .about-img-wrap, .about-content, .about-tag, .field, .contact-item, .footer-grid > *, .why-card, .feature-card, .type-card, .france-card, .zone-card, .faq-item, .tech-item'
   );
 
-  // Set initial hidden state via CSS
+  // Set initial hidden state — but ONLY for elements below the current viewport
+  const viewportBottom = window.scrollY + window.innerHeight;
+  
   revealElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(40px)';
-    el.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+    const rect = el.getBoundingClientRect();
+    const elTop = rect.top + window.scrollY;
+    
+    if (elTop < viewportBottom) {
+      // Already visible or above viewport — show immediately, no animation
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    } else {
+      // Below viewport — set hidden for reveal animation
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+    }
   });
 
-  // Use IntersectionObserver for reliable reveals
+  // Use IntersectionObserver for elements still hidden
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Stagger delay based on sibling position
-        const parent = entry.target.parentElement;
-        const siblings = parent ? Array.from(parent.children).filter(c => revealElements.length && c.style.opacity === '0') : [];
-        const siblingIndex = siblings.indexOf(entry.target);
-        const delay = Math.max(0, siblingIndex) * 80;
-
-        setTimeout(() => {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }, delay);
-
+        entry.target.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.05 });
 
-  revealElements.forEach(el => observer.observe(el));
+  revealElements.forEach(el => {
+    if (el.style.opacity === '0') observer.observe(el);
+  });
 
   // ========== 3D TILT on service cards (hover only, no scroll animation) ==========
   document.querySelectorAll('.service-card').forEach(card => {
