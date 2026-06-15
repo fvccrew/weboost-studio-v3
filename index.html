@@ -23,6 +23,15 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="Weboost Studio">
   <link rel="preload" href="assets/css/style.css" as="style"><link rel="stylesheet" href="assets/css/style.css">
+  <style>
+  /* Fallback : si le JS tarde (>1s), on affiche le contenu pour ne pas bloquer le mobile */
+  @keyframes wbFadeIn{to{opacity:1;transform:none}}
+  html:not(.js-ready) .hero-eyebrow,
+  html:not(.js-ready) .hero-desc,
+  html:not(.js-ready) .hero-btns{animation:wbFadeIn .6s ease forwards;animation-delay:1s}
+  html:not(.js-ready) .hero-title .line-inner{animation:wbFadeIn .6s ease forwards;animation-delay:1s}
+  html:not(.js-ready) .reveal-up{animation:wbFadeIn .6s ease forwards;animation-delay:1.1s}
+  </style>
 
   <!-- Schema.org LocalBusiness -->
   <script type="application/ld+json">
@@ -633,10 +642,9 @@
 </footer>
 
 <!-- Scripts -->
-<script src="assets/js/gsap.min.js"></script>
-<script src="assets/js/ScrollTrigger.min.js"></script>
-<script src="assets/js/ScrollToPlugin.min.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/gsap.min.js" defer></script>
+<script src="assets/js/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 <script>
 // Contact form AJAX submit
 const form = document.getElementById('contactForm');

@@ -5,7 +5,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  // GSAP est prêt : on désactive le fallback CSS et on laisse GSAP animer
+  document.documentElement.classList.add('js-ready');
+
+  gsap.registerPlugin(ScrollTrigger);
 
   // ========== SMOOTH SCROLL (pure GSAP, no Lenis) ==========
   gsap.ticker.lagSmoothing(0);
@@ -260,11 +263,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Smooth anchor
+  // Smooth anchor (natif, sans plugin)
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
-      const t = document.querySelector(link.getAttribute('href'));
-      if (t) { e.preventDefault(); gsap.to(window, { scrollTo: { y: t, offsetY: 80 }, duration: 1.2, ease: 'power3.inOut' }); }
+      const href = link.getAttribute('href');
+      if (href === '#') return;
+      const t = document.querySelector(href);
+      if (t) {
+        e.preventDefault();
+        const y = t.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     });
   });
 
