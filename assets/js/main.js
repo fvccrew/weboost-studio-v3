@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // GSAP est prêt : on désactive le fallback CSS et on laisse GSAP animer
   document.documentElement.classList.add('js-ready');
 
+  // Si on arrive sur une ancre (#services depuis une page ville), tout afficher
+  // immédiatement pour éviter le saut de scroll et le chargement chaotique
+  const hasHash = window.location.hash && window.location.hash.length > 1;
+
   gsap.registerPlugin(ScrollTrigger);
 
   // ========== SMOOTH SCROLL (pure GSAP, no Lenis) ==========
@@ -30,8 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const preloader = document.querySelector('.preloader');
   const alreadyVisited = sessionStorage.getItem('weboost_visited');
 
-  // Only show preloader on FIRST visit during this session AND if preloader exists in DOM
-  if (preloader && !alreadyVisited) {
+  // Only show preloader on FIRST visit during this session AND if preloader exists
+  // AND if not arriving directly on an anchor (from a city page menu link)
+  if (preloader && !alreadyVisited && !hasHash) {
     document.body.style.overflow = "hidden";
     sessionStorage.setItem('weboost_visited', '1');
 
@@ -222,12 +227,19 @@ document.addEventListener('DOMContentLoaded', () => {
     masterTl.to({}, { duration: 0.2 });
 
   } else {
-    // Preloader exists but already visited OR no preloader on this page
+    // Preloader exists but already visited OR no preloader OR arriving on anchor
     if (preloader) {
       preloader.style.display = 'none';
     }
     document.body.style.overflow = "";
-    heroReveal();
+    if (hasHash) {
+      // Arrivée sur ancre : hero visible instantanément, pas d'animation
+      document.querySelectorAll('.hero-title .line-inner').forEach(el => { el.style.transform = 'none'; });
+      document.querySelectorAll('.hero-eyebrow, .hero-desc, .hero-btns').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+      document.querySelectorAll('.hero-bg-glow').forEach(el => { el.style.opacity = '0.25'; });
+    } else {
+      heroReveal();
+    }
   }
 
   // ========== NAV ==========
@@ -380,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ========== SCROLL REVEALS — Progressive enhancement ==========
   // Content is visible by default. Animations only added if JS loads fast enough.
-  if (typeof IntersectionObserver !== 'undefined') {
+  if (typeof IntersectionObserver !== 'undefined' && !hasHash) {
     const revealElements = document.querySelectorAll(
       '.reveal-up, .section-num, .section-title, .service-card, .process-step, .pricing-card, .portfolio-item, .about-img-wrap, .about-content, .about-tag, .field, .contact-item, .footer-grid > *, .why-card, .feature-card, .type-card, .france-card, .zone-card, .faq-item, .tech-item'
     );
@@ -413,6 +425,22 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(el => {
       if (el.classList.contains('reveal-hidden')) observer.observe(el);
     });
+  } else if (hasHash) {
+    // Arrivée sur une ancre : tout afficher immédiatement, puis scroller proprement
+    document.querySelectorAll('.reveal-up, .reveal-hidden').forEach(el => {
+      el.classList.remove('reveal-hidden');
+      el.classList.add('reveal-visible');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    // Re-scroll vers l'ancre une fois la mise en page stabilisée
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      requestAnimationFrame(() => {
+        const y = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo(0, y);
+      });
+    }
   }
 
   // ========== 3D TILT on service cards (hover only, no scroll animation) ==========
