@@ -8,8 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
   // ========== SMOOTH SCROLL (pure GSAP, no Lenis) ==========
-  // Smooth anchor scrolling handled via ScrollToPlugin
   gsap.ticker.lagSmoothing(0);
+
+  // Fix back-navigation scroll position issues
+  window.history.scrollRestoration = 'manual';
+
+  // Refresh ScrollTrigger after everything is loaded
+  window.addEventListener('load', () => {
+    setTimeout(() => ScrollTrigger.refresh(), 100);
+  });
+
+  // Also refresh when coming back to the tab
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) ScrollTrigger.refresh();
+  });
 
   // Lock scroll during preloader
   const preloader = document.querySelector('.preloader');
@@ -307,172 +319,131 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========== INFINITE MARQUEES ==========
   document.querySelectorAll('.marquee-row').forEach(row => {
     const isReverse = row.classList.contains('reverse');
-    const clone = row.innerHTML;
-    row.innerHTML += clone;
+    
+    // Only clone if not already cloned
+    if (!row.dataset.cloned) {
+      row.innerHTML += row.innerHTML;
+      row.dataset.cloned = 'true';
+    }
 
     const totalW = row.scrollWidth / 2;
 
     if (isReverse) gsap.set(row, { x: -totalW, force3D: true });
 
-    const tween = gsap.to(row, {
+    gsap.to(row, {
       x: isReverse ? 0 : -totalW,
       duration: isReverse ? 28 : 32,
       ease: 'none',
       repeat: -1,
       force3D: true,
     });
+  });
 
-    // Velocity-reactive speed
-    ScrollTrigger.create({
-      trigger: row.closest('.marquee-block'),
-      start: 'top bottom',
-      end: 'bottom top',
-      onUpdate: self => {
-        const v = Math.abs(self.getVelocity());
-        const speed = gsap.utils.clamp(1, 5, 1 + v / 2000);
-        gsap.to(tween, { timeScale: speed, duration: 0.4, ease: 'power2.out', overwrite: true });
-      },
-      onLeave: () => gsap.to(tween, { timeScale: 1, duration: 0.8 }),
-      onLeaveBack: () => gsap.to(tween, { timeScale: 1, duration: 0.8 }),
+  // ========== DIVIDER TEXT — Infinite scroll ==========
+  document.querySelectorAll('.section-divider').forEach(divider => {
+    const text = divider.querySelector('.divider-text');
+    if (!text) return;
+    const dir = text.dataset.dir === 'right' ? -1 : 1;
+    
+    const clone = text.cloneNode(true);
+    clone.style.marginLeft = '60px';
+    
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'display:flex;align-items:center;white-space:nowrap;will-change:transform;';
+    
+    divider.innerHTML = '';
+    wrapper.appendChild(text);
+    wrapper.appendChild(clone);
+    divider.appendChild(wrapper);
+    
+    const totalW = wrapper.scrollWidth / 2;
+    
+    if (dir < 0) gsap.set(wrapper, { x: -totalW });
+    
+    gsap.to(wrapper, {
+      x: dir < 0 ? 0 : -totalW,
+      duration: 30,
+      ease: 'none',
+      repeat: -1,
+      force3D: true,
     });
   });
 
-  // ========== DIVIDER TEXT PARALLAX ==========
-  document.querySelectorAll('.divider-text').forEach(text => {
-    const dir = text.dataset.dir === 'right' ? 1 : -1;
-    gsap.fromTo(text,
-      { x: dir * 300 },
-      {
-        x: dir * -300,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: text.closest('.section-divider'),
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 0.8,
-        }
-      }
+  // ========== SCROLL REVEALS — Progressive enhancement ==========
+  // Content is visible by default. Animations only added if JS loads fast enough.
+  if (typeof IntersectionObserver !== 'undefined') {
+    const revealElements = document.querySelectorAll(
+      '.reveal-up, .section-num, .section-title, .service-card, .process-step, .pricing-card, .portfolio-item, .about-img-wrap, .about-content, .about-tag, .field, .contact-item, .footer-grid > *, .why-card, .feature-card, .type-card, .france-card, .zone-card, .faq-item, .tech-item'
     );
-  });
 
-  // ========== SCROLL REVEALS ==========
-  // Generic reveal-up
-  gsap.utils.toArray('.reveal-up').forEach(el => {
-    gsap.to(el, {
-      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', force3D: true,
-    });
-  });
+    const viewportBottom = window.scrollY + window.innerHeight;
+    
+    revealElements.forEach(el => {
+      // Never hide zone cards (they're links — must stay visible for back-navigation)
+      if (el.closest('.zones-grid-index')) return;
 
-  // Section nums
-  gsap.utils.toArray('.section-num').forEach(n => {
-    gsap.from(n, {
-      scrollTrigger: { trigger: n, start: 'top 90%', once: true },
-      opacity: 0, x: -30, duration: 0.6, ease: 'power3.out',
-    });
-  });
-
-  // Section titles — clip from bottom
-  gsap.utils.toArray('.section-title').forEach(t => {
-    gsap.from(t, {
-      scrollTrigger: { trigger: t, start: 'top 88%', once: true },
-      clipPath: 'inset(100% 0 0 0)', y: 40, duration: 1, ease: 'power4.out',
-    });
-  });
-
-  // ========== SERVICE CARDS ==========
-  const sCards = gsap.utils.toArray('.service-card');
-  if (sCards.length) {
-    gsap.from(sCards, {
-      scrollTrigger: { trigger: '.services-grid', start: 'top 82%', once: true },
-      opacity: 0, y: 80, rotateX: 10, scale: 0.92, force3D: true,
-      duration: 0.8, stagger: 0.08, ease: 'power3.out',
-      transformPerspective: 800,
+      const rect = el.getBoundingClientRect();
+      const elTop = rect.top + window.scrollY;
+      
+      // Only animate elements below the viewport
+      if (elTop >= viewportBottom) {
+        el.classList.add('reveal-hidden');
+      }
     });
 
-    // 3D tilt
-    sCards.forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width - 0.5) * 12;
-        const y = ((e.clientY - r.top) / r.height - 0.5) * -12;
-        gsap.to(card, { rotateY: x, rotateX: y, transformPerspective: 600, duration: 0.3, ease: 'power2.out' });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('reveal-hidden');
+          entry.target.classList.add('reveal-visible');
+          observer.unobserve(entry.target);
+        }
       });
-      card.addEventListener('mouseleave', () => {
-        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' });
-      });
+    }, { threshold: 0.05 });
+
+    revealElements.forEach(el => {
+      if (el.classList.contains('reveal-hidden')) observer.observe(el);
     });
   }
 
-  // ========== PROCESS STEPS ==========
-  gsap.utils.toArray('.process-step').forEach((step, i) => {
-    gsap.from(step, {
-      scrollTrigger: { trigger: step, start: 'top 88%', once: true },
-      opacity: 0, y: 60, scale: 0.95, duration: 0.7, delay: i * 0.1, ease: 'power3.out',
+  // ========== 3D TILT on service cards (hover only, no scroll animation) ==========
+  document.querySelectorAll('.service-card').forEach(card => {
+    if (card.tagName === 'A') return;
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - 0.5) * 12;
+      const y = ((e.clientY - r.top) / r.height - 0.5) * -12;
+      gsap.to(card, { rotateY: x, rotateX: y, transformPerspective: 600, duration: 0.3, ease: 'power2.out' });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' });
     });
   });
 
-  // ========== PRICING CARDS ==========
-  const pCards = gsap.utils.toArray('.pricing-card');
-  if (pCards.length) {
-    gsap.from(pCards, {
-      scrollTrigger: { trigger: '.pricing-grid', start: 'top 82%', once: true },
-      opacity: 0, y: 70, rotateX: 8, scale: 0.93,
-      duration: 0.8, stagger: 0.12, ease: 'power3.out',
-      transformPerspective: 800,
+  // ========== FAQ ACCORDION ==========
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
     });
-  }
-
-  // ========== PORTFOLIO ==========
-  const folio = gsap.utils.toArray('.portfolio-item');
-  if (folio.length) {
-    gsap.from(folio, {
-      scrollTrigger: { trigger: '.portfolio-grid', start: 'top 82%', once: true },
-      opacity: 0, y: 70, scale: 0.9, duration: 0.8, stagger: 0.12, ease: 'power3.out',
-    });
-  }
-
-  // ========== ABOUT ==========
-  if (document.querySelector('.about-grid')) {
-    gsap.from('.about-img-wrap', {
-      scrollTrigger: { trigger: '.about-grid', start: 'top 82%', once: true },
-      opacity: 0, x: -80, rotateY: 5, duration: 1, ease: 'power3.out', transformPerspective: 800,
-    });
-    gsap.from('.about-content', {
-      scrollTrigger: { trigger: '.about-grid', start: 'top 82%', once: true },
-      opacity: 0, x: 80, duration: 1, ease: 'power3.out',
-    });
-
-    // Tags stagger
-    const tags = gsap.utils.toArray('.about-tag');
-    if (tags.length) {
-      gsap.from(tags, {
-        scrollTrigger: { trigger: '.about-tags', start: 'top 90%', once: true },
-        opacity: 0, scale: 0.7, y: 20, duration: 0.5, stagger: 0.05, ease: 'back.out(2)',
-      });
-    }
-  }
-
-  // ========== CONTACT ==========
-  const fields = gsap.utils.toArray('.field');
-  if (fields.length) {
-    gsap.from(fields, {
-      scrollTrigger: { trigger: '.contact-form', start: 'top 82%', once: true },
-      opacity: 0, y: 30, duration: 0.6, stagger: 0.06, ease: 'power3.out',
-    });
-  }
-  const cItems = gsap.utils.toArray('.contact-item');
-  if (cItems.length) {
-    gsap.from(cItems, {
-      scrollTrigger: { trigger: '.contact-info', start: 'top 82%', once: true },
-      opacity: 0, x: 50, duration: 0.6, stagger: 0.08, ease: 'power3.out',
-    });
-  }
-
-  // ========== FOOTER ==========
-  gsap.from('.footer-grid > *', {
-    scrollTrigger: { trigger: '.footer', start: 'top 92%', once: true },
-    opacity: 0, y: 30, duration: 0.6, stagger: 0.08, ease: 'power3.out',
   });
 
+});
+
+// ========== FIX RETOUR NAVIGATEUR (bfcache) ==========
+// Quand on revient avec le bouton précédent, force tout en visible
+window.addEventListener('pageshow', function(e) {
+  if (e.persisted) {
+    document.querySelectorAll('.reveal-hidden').forEach(function(el) {
+      el.classList.remove('reveal-hidden');
+      el.classList.add('reveal-visible');
+    });
+    // Force aussi tous les éléments potentiellement cachés
+    document.querySelectorAll('.reveal-up, .service-card, .pricing-card, .portfolio-item, .faq-item').forEach(function(el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+  }
 });

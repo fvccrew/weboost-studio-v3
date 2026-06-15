@@ -16,6 +16,15 @@ RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)/$ /$1 [L,R=301]
 
+# ---- REDIRECTIONS anciennes pages → accueil ----
+RewriteRule ^zones\.html$ / [R=301,L]
+RewriteRule ^service-web\.html$ / [R=301,L]
+RewriteRule ^service-seo\.html$ / [R=301,L]
+RewriteRule ^service-social\.html$ / [R=301,L]
+RewriteRule ^service-ads\.html$ / [R=301,L]
+RewriteRule ^service-logo\.html$ / [R=301,L]
+RewriteRule ^service-maintenance\.html$ / [R=301,L]
+
 # ---- PAGE D'ERREUR 404 PERSONNALISÉE ----
 ErrorDocument 404 /index.html
 
