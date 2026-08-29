@@ -13,7 +13,7 @@
   <link rel="preload" href="assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="canonical" href="https://www.weboost-studio.fr/">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#4f46e5">
+  <meta name="theme-color" content="#e3a836">
   
   <!-- Open Graph -->
   <meta property="og:title" content="Weboost Studio | Création Site Web Saint-Tropez — Expert Digital Var 83">
@@ -129,6 +129,10 @@
 </head>
 <body>
 
+<a href="#main" class="skip-link">Aller au contenu</a>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
+
 <!-- ==================== PRELOADER — LETTRES EXPLOSÉES 3D ==================== -->
 <div class="preloader">
   <div class="preloader-stage">
@@ -171,9 +175,16 @@
 </div>
 
 <!-- ==================== HERO ==================== -->
+<main id="main">
 <section class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-bg-glow g1"></div>
   <div class="hero-bg-glow g2"></div>
+  <div class="hero-meta reveal-up" aria-hidden="true">
+    43.2677° N — 6.6407° E<br>
+    Golfe de Saint-Tropez, Var<br>
+    <span class="hero-status"><span class="dot-live"></span> Disponible pour un nouveau projet</span>
+  </div>
   <div class="container hero-content">
     <div class="hero-eyebrow">
       <span class="dash"></span> Développeur Web Freelance — Golfe de Saint-Tropez, Var 83
@@ -405,28 +416,43 @@
     <div class="section-head">
       <div class="section-num"><span class="ln"></span> 04 — Portfolio</div>
       <h2 class="section-title">Sites web <span class="thin">créés</span><br>dans le Var</h2>
-      <p class="section-sub reveal-up">Sites de démonstration réalisés pour présenter le style et la qualité de nos créations. Ces exemples fictifs illustrent les différentes formules proposées.</p>
+      <p class="section-sub reveal-up">Trois sites de démonstration, un par formule, pour montrer le niveau de finition auquel vous pouvez vous attendre. Aucun client fictif, juste le style et la structure réels de chaque offre.</p>
     </div>
-    <div class="portfolio-grid">
-      <a href="https://fvccrew.github.io/mdz-piscine/" target="_blank" class="portfolio-item">
-        <img src="assets/images/exemple-starter.webp" alt="MDZ Piscine" loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="portfolio-tag">Formule Starter</div>
-          <div class="portfolio-name">MDZ Piscine</div>
+    <div class="portfolio-list">
+      <a href="https://fvccrew.github.io/mdz-piscine/" target="_blank" rel="noopener" class="portfolio-row" data-cursor="Voir le site">
+        <div class="portfolio-row-inner">
+          <div class="portfolio-row-num">01</div>
+          <div class="portfolio-row-info">
+            <div class="portfolio-row-tag">Démo — Formule Starter</div>
+            <div class="portfolio-row-name">MDZ Piscine</div>
+            <p class="portfolio-row-desc">Site vitrine 3 pages pour une entreprise de piscines : présentation des services, galerie de réalisations et contact direct.</p>
+            <span class="portfolio-row-link">Voir le site <span class="arrow">↗</span></span>
+          </div>
+          <div class="portfolio-row-img"><img src="assets/images/exemple-starter.webp" alt="Aperçu du site de démonstration MDZ Piscine, formule Starter" loading="lazy" width="1920" height="909"></div>
         </div>
       </a>
-      <a href="https://fvccrew.github.io/da-enzo/" target="_blank" class="portfolio-item">
-        <img src="assets/images/exemple-business.webp" alt="Da Enzo" loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="portfolio-tag">Formule Business</div>
-          <div class="portfolio-name">Da Enzo</div>
+      <a href="https://fvccrew.github.io/da-enzo/" target="_blank" rel="noopener" class="portfolio-row" data-cursor="Voir le site">
+        <div class="portfolio-row-inner">
+          <div class="portfolio-row-num">02</div>
+          <div class="portfolio-row-info">
+            <div class="portfolio-row-tag">Démo — Formule Business</div>
+            <div class="portfolio-row-name">Da Enzo</div>
+            <p class="portfolio-row-desc">Site 5 pages pour un restaurant : carte, ambiance et prise de contact mises en scène avec un design premium sur-mesure.</p>
+            <span class="portfolio-row-link">Voir le site <span class="arrow">↗</span></span>
+          </div>
+          <div class="portfolio-row-img"><img src="assets/images/exemple-business.webp" alt="Aperçu du site de démonstration Da Enzo, formule Business" loading="lazy" width="1920" height="911"></div>
         </div>
       </a>
-      <a href="https://fvccrew.github.io/st-prestige/" target="_blank" class="portfolio-item">
-        <img src="assets/images/exemple-premium.webp" alt="ST Prestige" loading="lazy">
-        <div class="portfolio-overlay">
-          <div class="portfolio-tag">Formule Premium</div>
-          <div class="portfolio-name">ST Prestige</div>
+      <a href="https://fvccrew.github.io/st-prestige/" target="_blank" rel="noopener" class="portfolio-row" data-cursor="Voir le site">
+        <div class="portfolio-row-inner">
+          <div class="portfolio-row-num">03</div>
+          <div class="portfolio-row-info">
+            <div class="portfolio-row-tag">Démo — Formule Premium</div>
+            <div class="portfolio-row-name">ST Prestige</div>
+            <p class="portfolio-row-desc">Site sur-mesure avec animations et interactions poussées. Positionnement haut de gamme pour une clientèle exigeante.</p>
+            <span class="portfolio-row-link">Voir le site <span class="arrow">↗</span></span>
+          </div>
+          <div class="portfolio-row-img"><img src="assets/images/exemple-premium.webp" alt="Aperçu du site de démonstration ST Prestige, formule Premium" loading="lazy" width="1920" height="913"></div>
         </div>
       </a>
     </div>
@@ -508,13 +534,19 @@
     </div>
     <div class="about-grid">
       <div class="about-img-wrap">
-        <img src="assets/images/stephane-miliziano.webp" alt="Stéphane Miliziano" class="about-img" loading="lazy">
+        <img src="assets/images/stephane-miliziano.webp" alt="Stéphane Miliziano, fondateur de Weboost Studio" class="about-img" loading="lazy" width="800" height="1027">
         <div class="about-img-accent"></div>
+        <div class="about-img-coords">Stéphane Miliziano — Fondateur</div>
       </div>
       <div class="about-content">
         <h3>Webmaster freelance spécialisé création de sites internet</h3>
         <p>Développeur web implanté dans le Golfe de Saint-Tropez, je conçois des sites internet performants, optimisés pour le référencement Google et pensés pour convertir vos visiteurs en clients.</p>
         <p>J'accompagne les TPE, PME, artisans, restaurants et hôtels du Var dans leur transformation digitale. Chaque site web est développé sur-mesure avec un design responsive adapté à tous les écrans.</p>
+        <div class="about-principles">
+          <div class="about-principle reveal-up"><span class="about-principle-num">01</span><p><strong>Du code, pas un template.</strong> Chaque site est écrit sur-mesure — HTML, CSS et JS propres, sans surcouche inutile ni page builder.</p></div>
+          <div class="about-principle reveal-up"><span class="about-principle-num">02</span><p><strong>Le SEO dès la conception.</strong> Structure, vitesse et mots-clés locaux sont pensés avant la première ligne de design, pas ajoutés après coup.</p></div>
+          <div class="about-principle reveal-up"><span class="about-principle-num">03</span><p><strong>Un seul interlocuteur.</strong> Du premier échange à la mise en ligne, vous parlez directement à la personne qui code votre site.</p></div>
+        </div>
         <div class="about-tags">
           <span class="about-tag">HTML / CSS / JS</span>
           <span class="about-tag">PHP</span>
@@ -613,9 +645,24 @@
   </div>
 </section>
 
-<!-- ==================== FOOTER ==================== -->
+</main>
+
+<!-- ==================== FOOTER — dernière scène ==================== -->
 <footer class="footer">
-  <div class="container">
+  <div class="footer-cta">
+    <div class="footer-cta-glow" aria-hidden="true"></div>
+    <div class="container footer-cta-inner">
+      <div class="footer-cta-eyebrow"><span class="dash"></span> Un projet en tête ?</div>
+      <h2 class="footer-cta-title">Parlons de<br><span class="thin">votre site</span></h2>
+      <a href="mailto:contact@weboost-studio.fr" class="footer-cta-email">contact@weboost-studio.fr</a>
+      <div class="footer-cta-meta">
+        <span><span class="dot-live"></span> Disponible — réponse sous 24h</span>
+        <span>📞 <a href="tel:+33669371667">06 69 37 16 67</a></span>
+        <span>📍 Golfe de Saint-Tropez, Var</span>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-nav">
     <div class="footer-grid">
       <div>
         <div class="footer-logo">Weboost <span class="accent">Studio</span></div>

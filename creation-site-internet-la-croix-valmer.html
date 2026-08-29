@@ -33,9 +33,11 @@
   --text: #ebebeb;
   --text-muted: #a0a0a0;
   --text-dim: #737373;
-  --accent: #4f46e5;
-  --accent-light: #818cf8;
-  --accent-glow: rgba(79,70,229,0.12);
+  --accent: #e3a836;
+  --accent-light: #f4c752;
+  --accent-glow: rgba(227,168,54,0.14);
+  --navy-glow: #263353;
+  --ink: #0b0f1a;
   --border: rgba(255,255,255,0.08);
   --border-hover: rgba(255,255,255,0.15);
   --font-heading: 'Poppins', sans-serif;
@@ -47,11 +49,11 @@
 }
 
 /* --- Fonts locales (RGPD) --- */
-@font-face{font-family:'Inter';font-weight:400;font-display:swap;src:url('../fonts/Inter-Regular.woff2') format('woff2')}
-@font-face{font-family:'Inter';font-weight:500;font-display:swap;src:url('../fonts/Inter-Medium.woff2') format('woff2')}
-@font-face{font-family:'Inter';font-weight:600;font-display:swap;src:url('../fonts/Inter-SemiBold.woff2') format('woff2')}
-@font-face{font-family:'Poppins';font-weight:700;font-display:swap;src:url('../fonts/Poppins-Bold.woff2') format('woff2')}
-@font-face{font-family:'Poppins';font-weight:800;font-display:swap;src:url('../fonts/Poppins-ExtraBold.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:400;font-display:swap;src:url('assets/fonts/Inter-Regular.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:500;font-display:swap;src:url('assets/fonts/Inter-Medium.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:600;font-display:swap;src:url('assets/fonts/Inter-SemiBold.woff2') format('woff2')}
+@font-face{font-family:'Poppins';font-weight:700;font-display:swap;src:url('assets/fonts/Poppins-Bold.woff2') format('woff2')}
+@font-face{font-family:'Poppins';font-weight:800;font-display:swap;src:url('assets/fonts/Poppins-ExtraBold.woff2') format('woff2')}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-font-smoothing:antialiased;overflow-x:hidden;scroll-behavior:smooth}
@@ -71,7 +73,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent);transition:width .4s var(--ease)}
 .nav-link:hover{color:var(--white)}
 .nav-link:hover::after{width:100%}
-.nav-cta{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;background:var(--accent);color:var(--white);padding:10px 24px;border-radius:6px;transition:background .3s,transform .2s}
+.nav-cta{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;background:var(--accent);color:var(--ink);padding:10px 24px;border-radius:6px;transition:background .3s,transform .2s}
 .nav-cta:hover{background:var(--accent-light);transform:translateY(-1px)}
 .nav-toggle{display:none;flex-direction:column;gap:5px;width:26px;z-index:101}
 .nav-toggle span{display:block;height:2px;background:var(--white);transition:all .3s var(--ease);transform-origin:center}
@@ -86,7 +88,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .hero{position:relative;min-height:70vh;display:flex;align-items:center;padding:calc(var(--nav-h) + 60px) 0 80px;overflow:hidden}
 .hero-glow{position:absolute;border-radius:50%;filter:blur(100px);opacity:.18;pointer-events:none}
 .hero-glow.g1{width:500px;height:500px;background:var(--accent);top:-100px;right:-100px}
-.hero-glow.g2{width:400px;height:400px;background:#7c3aed;bottom:-100px;left:-80px;opacity:.12}
+.hero-glow.g2{width:400px;height:400px;background:var(--navy-glow);bottom:-100px;left:-80px;opacity:.12}
 .hero-content{position:relative;z-index:2;max-width:900px}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--accent-light);margin-bottom:24px}
 .hero-eyebrow .dash{width:32px;height:1px;background:var(--accent-light)}
@@ -96,8 +98,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .hero-desc{font-size:clamp(15px,2vw,18px);color:var(--text-muted);max-width:680px;margin-bottom:36px;line-height:1.7}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:10px;font-size:15px;font-weight:600;transition:all .3s var(--ease)}
-.btn-fill{background:var(--accent);color:#fff}
-.btn-fill:hover{background:#4338ca;transform:translateY(-2px)}
+.btn-fill{background:var(--accent);color:var(--ink)}
+.btn-fill:hover{background:var(--accent-light);transform:translateY(-2px)}
 .btn-outline{border:1px solid var(--border-hover);color:var(--text)}
 .btn-outline:hover{background:var(--bg-card);border-color:var(--accent-light)}
 .btn .arrow{transition:transform .3s}
@@ -172,7 +174,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .cookie p{font-size:13px;color:var(--text-muted);line-height:1.6}
 .cookie p strong{color:var(--text);font-size:14px}
 .cookie a{color:var(--accent-light)}
-.cookie-btn{margin-top:14px;padding:10px 24px;background:var(--accent);color:#fff;border-radius:8px;font-size:14px;font-weight:600;width:100%}
+.cookie-btn{margin-top:14px;padding:10px 24px;background:var(--accent);color:var(--ink);border-radius:8px;font-size:14px;font-weight:600;width:100%}
 
 /* --- RESPONSIVE --- */
 @media(max-width:980px){
@@ -187,6 +189,19 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   .footer-bottom{flex-direction:column;text-align:center}
   .hero{min-height:auto}
 }
+
+/* --- a11y + cursor + grain (added) --- */
+.skip-link{position:fixed;top:-60px;left:16px;z-index:10000;background:var(--accent);color:var(--ink);font-weight:700;font-size:14px;padding:12px 20px;border-radius:6px;transition:top .25s var(--ease)}
+.skip-link:focus{top:16px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent-light);outline-offset:3px;border-radius:4px}
+body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.cursor,.cursor-ring{display:none!important}}
+.cursor,.cursor-ring{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%);will-change:transform}
+.cursor{width:6px;height:6px;background:var(--accent-light)}
+.cursor-ring{width:38px;height:38px;border:1px solid var(--border-hover);transition:width .25s var(--ease),height .25s var(--ease),border-color .25s,background .25s}
+.cursor-ring.is-active{width:64px;height:64px;border-color:var(--accent);background:var(--accent-glow)}
+html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
+@media (hover:none),(pointer:coarse){.cursor,.cursor-ring{display:none!important}}
 </style>
 
 <script type="application/ld+json">
@@ -194,6 +209,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 </script>
 </head>
 <body>
+
+<a href="#main" class="skip-link">Aller au contenu</a>
+<div class="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -220,7 +239,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   <a href="index.html#contact">Contact</a>
 </div>
 
-<header class="hero">
+<header class="hero" id="main">
   <div class="hero-glow g1"></div>
   <div class="hero-glow g2"></div>
   <div class="container hero-content">
@@ -399,6 +418,21 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 
 <script>
 (function(){
+  var prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch=window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  if(!isTouch && !prefersReducedMotion){
+    var cdot=document.querySelector('.cursor'), cring=document.querySelector('.cursor-ring');
+    if(cdot && cring){
+      document.documentElement.classList.add('has-cursor');
+      var mx=-100,my=-100,rx=-100,ry=-100;
+      window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cdot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'});
+      (function loop(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;cring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';requestAnimationFrame(loop)})();
+      document.querySelectorAll('a,button').forEach(function(el){
+        el.addEventListener('mouseenter',function(){cring.classList.add('is-active')});
+        el.addEventListener('mouseleave',function(){cring.classList.remove('is-active')});
+      });
+    }
+  }
   var t=document.getElementById('navToggle'),m=document.getElementById('navMobile');
   if(t&&m){t.addEventListener('click',function(){m.classList.toggle('open');t.classList.toggle('active')});
     m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');t.classList.remove('active')})});}

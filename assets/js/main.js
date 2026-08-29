@@ -8,6 +8,54 @@ document.addEventListener('DOMContentLoaded', () => {
   // GSAP est prêt : on désactive le fallback CSS et on laisse GSAP animer
   document.documentElement.classList.add('js-ready');
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  // ========== CUSTOM CURSOR (desktop, motion-safe only) ==========
+  if (!isTouch && !prefersReducedMotion) {
+    const dot = document.querySelector('.cursor');
+    const ring = document.querySelector('.cursor-ring');
+    if (dot && ring) {
+      document.documentElement.classList.add('has-cursor');
+      const label = ring.querySelector('.cursor-label');
+      let mx = -100, my = -100, rx = -100, ry = -100;
+      window.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+      });
+      gsap.ticker.add(() => {
+        rx += (mx - rx) * 0.18;
+        ry += (my - ry) * 0.18;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+      });
+      document.querySelectorAll('a, button, .faq-q').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.classList.add('is-active');
+          if (label) label.textContent = el.dataset.cursor || '';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.classList.remove('is-active');
+          if (label) label.textContent = '';
+        });
+      });
+      document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+      document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
+    }
+
+    // ---- Magnetic buttons ----
+    document.querySelectorAll('.btn, .nav-cta').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) * 0.3;
+        const y = (e.clientY - r.top - r.height / 2) * 0.3;
+        gsap.to(btn, { x, y, duration: 0.3, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1,0.4)' });
+      });
+    });
+  }
+
   // Si on arrive sur une ancre (#services depuis une page ville), tout afficher
   // immédiatement pour éviter le saut de scroll et le chargement chaotique
   const hasHash = window.location.hash && window.location.hash.length > 1;
@@ -36,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Only show preloader on FIRST visit during this session AND if preloader exists
   // AND if not arriving directly on an anchor (from a city page menu link)
-  if (preloader && !alreadyVisited && !hasHash) {
+  if (preloader && !alreadyVisited && !hasHash && !prefersReducedMotion) {
     document.body.style.overflow = "hidden";
     sessionStorage.setItem('weboost_visited', '1');
 
@@ -128,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Screen flash + wipe
         exitTl.to(preloader, {
-          backgroundColor: '#4f46e5',
+          backgroundColor: '#e3a836',
           duration: 0.08,
         }, 0.4);
         exitTl.to(preloader, {
@@ -235,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (hasHash) {
       // Arrivée sur ancre : hero visible instantanément, pas d'animation
       document.querySelectorAll('.hero-title .line-inner').forEach(el => { el.style.transform = 'none'; });
-      document.querySelectorAll('.hero-eyebrow, .hero-desc, .hero-btns').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+      document.querySelectorAll('.hero-eyebrow, .hero-desc, .hero-btns, .hero-meta').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
       document.querySelectorAll('.hero-bg-glow').forEach(el => { el.style.opacity = '0.25'; });
     } else {
       heroReveal();
@@ -326,6 +374,11 @@ document.addEventListener('DOMContentLoaded', () => {
       opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
     }, 0.9);
 
+    // Meta (coordinates / availability)
+    tl.to('.hero-meta', {
+      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+    }, 1.0);
+
     // Parallax glows
     gsap.to('.hero-bg-glow.g1', {
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
@@ -394,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Content is visible by default. Animations only added if JS loads fast enough.
   if (typeof IntersectionObserver !== 'undefined' && !hasHash) {
     const revealElements = document.querySelectorAll(
-      '.reveal-up, .section-num, .section-title, .service-card, .process-step, .pricing-card, .portfolio-item, .about-img-wrap, .about-content, .about-tag, .field, .contact-item, .footer-grid > *, .why-card, .feature-card, .type-card, .france-card, .zone-card, .faq-item, .tech-item'
+      '.reveal-up, .section-num, .section-title, .service-card, .process-step, .pricing-card, .portfolio-row, .about-img-wrap, .about-content, .about-tag, .about-principle, .field, .contact-item, .footer-grid > *, .why-card, .feature-card, .type-card, .france-card, .zone-card, .faq-item, .tech-item'
     );
 
     const viewportBottom = window.scrollY + window.innerHeight;
@@ -478,7 +531,7 @@ window.addEventListener('pageshow', function(e) {
       el.classList.add('reveal-visible');
     });
     // Force aussi tous les éléments potentiellement cachés
-    document.querySelectorAll('.reveal-up, .service-card, .pricing-card, .portfolio-item, .faq-item').forEach(function(el) {
+    document.querySelectorAll('.reveal-up, .service-card, .pricing-card, .portfolio-row, .faq-item').forEach(function(el) {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });

@@ -78,9 +78,9 @@ $body = "
 <body style='font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px;'>
   <div style='max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);'>
     
-    <div style='background: #4f46e5; padding: 24px 32px;'>
-      <h1 style='color: #ffffff; font-size: 20px; margin: 0;'>Nouvelle demande de contact</h1>
-      <p style='color: rgba(255,255,255,0.8); font-size: 14px; margin: 8px 0 0;'>Via le formulaire weboost-studio.fr</p>
+    <div style='background: #0b0f1a; padding: 24px 32px; border-bottom: 3px solid #e3a836;'>
+      <h1 style='color: #f4c752; font-size: 20px; margin: 0;'>Nouvelle demande de contact</h1>
+      <p style='color: rgba(255,255,255,0.7); font-size: 14px; margin: 8px 0 0;'>Via le formulaire weboost-studio.fr</p>
     </div>
     
     <div style='padding: 32px;'>
@@ -91,7 +91,7 @@ $body = "
         </tr>
         <tr>
           <td style='padding: 12px 0; border-bottom: 1px solid #eee; color: #666; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; vertical-align: top;'>Email</td>
-          <td style='padding: 12px 0; border-bottom: 1px solid #eee; font-size: 15px; color: #333;'><a href='mailto:$email' style='color: #4f46e5;'>$email</a></td>
+          <td style='padding: 12px 0; border-bottom: 1px solid #eee; font-size: 15px; color: #333;'><a href='mailto:$email' style='color: #b3791c;'>$email</a></td>
         </tr>
         <tr>
           <td style='padding: 12px 0; border-bottom: 1px solid #eee; color: #666; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; vertical-align: top;'>Téléphone</td>
