@@ -8,13 +8,12 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" sizes="192x192" href="favicon-192.png">
-  <link rel="preload" href="assets/fonts/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/Poppins-Black.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="canonical" href="https://www.weboost-studio.fr/">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#e3a836">
-  
+  <meta name="theme-color" content="#ffffff">
+
   <!-- Open Graph -->
   <meta property="og:title" content="Weboost Studio | Création Site Web Saint-Tropez — Expert Digital Var 83">
   <meta property="og:description" content="Création de sites vitrines professionnels dans le Golfe de Saint-Tropez. Design moderne, SEO, performance. Devis gratuit sous 24h.">
@@ -23,15 +22,6 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="Weboost Studio">
   <link rel="preload" href="assets/css/style.css" as="style"><link rel="stylesheet" href="assets/css/style.css">
-  <style>
-  /* Fallback : si le JS tarde (>1s), on affiche le contenu pour ne pas bloquer le mobile */
-  @keyframes wbFadeIn{to{opacity:1;transform:none}}
-  html:not(.js-ready) .hero-eyebrow,
-  html:not(.js-ready) .hero-desc,
-  html:not(.js-ready) .hero-btns{animation:wbFadeIn .6s ease forwards;animation-delay:1s}
-  html:not(.js-ready) .hero-title .line-inner{animation:wbFadeIn .6s ease forwards;animation-delay:1s}
-  html:not(.js-ready) .reveal-up{animation:wbFadeIn .6s ease forwards;animation-delay:1.1s}
-  </style>
 
   <!-- Schema.org LocalBusiness -->
   <script type="application/ld+json">
@@ -130,23 +120,6 @@
 <body>
 
 <a href="#main" class="skip-link">Aller au contenu</a>
-<div class="cursor" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
-
-<!-- ==================== PRELOADER — LETTRES EXPLOSÉES 3D ==================== -->
-<div class="preloader">
-  <div class="preloader-stage">
-    <!-- Les lettres sont générées dynamiquement par JS -->
-    <div class="preloader-letters" id="preloaderLetters"></div>
-    <div class="preloader-sub">
-      <span class="preloader-sub-word">CRÉATION</span>
-      <span class="preloader-sub-word">SITE WEB</span>
-      <span class="preloader-sub-word">SAINT-TROPEZ</span>
-    </div>
-  </div>
-  <div class="preloader-counter">0</div>
-  <div class="preloader-line"></div>
-</div>
 
 <!-- ==================== NAV ==================== -->
 <nav class="nav">
@@ -177,52 +150,51 @@
 <!-- ==================== HERO ==================== -->
 <main id="main">
 <section class="hero">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-bg-glow g1"></div>
-  <div class="hero-bg-glow g2"></div>
-  <div class="hero-meta reveal-up" aria-hidden="true">
-    43.2677° N — 6.6407° E<br>
-    Golfe de Saint-Tropez, Var<br>
-    <span class="hero-status"><span class="dot-live"></span> Disponible pour un nouveau projet</span>
-  </div>
-  <div class="container hero-content">
-    <div class="hero-eyebrow">
-      <span class="dash"></span> Développeur Web Freelance — Golfe de Saint-Tropez, Var 83
-    </div>
-    <h1 class="hero-title">
-      <span class="line"><span class="line-inner">Création de</span></span>
-      <span class="line"><span class="line-inner"><span class="accent-word">sites web</span> sur-mesure</span></span>
-      <span class="line"><span class="line-inner"><span class="stroke">Saint-Tropez</span></span></span>
-    </h1>
-    <p class="hero-desc">
-      Sites web professionnels, modernes et optimisés SEO pour les entreprises du Var. 
-      Du design responsive à l'optimisation de votre référencement local, votre développeur web 
-      à Saint-Tropez transforme votre vision en résultats concrets. Devis gratuit sous 24h.
-    </p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn btn-fill">Devis gratuit <span class="arrow">→</span></a>
-      <a href="#portfolio" class="btn btn-outline">Exemples de sites</a>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-eyebrow"><span class="hero-num">01</span> Développeur Web Freelance — Golfe de Saint-Tropez, Var 83</div>
+      <h1 class="hero-title">
+        <span class="line"><span class="line-inner">Création de</span></span>
+        <span class="line"><span class="line-inner"><span class="accent-word">sites web</span> sur-mesure</span></span>
+        <span class="line"><span class="line-inner">à Saint-Tropez.</span></span>
+      </h1>
+      <p class="hero-desc">
+        Sites web professionnels, modernes et optimisés SEO pour les entreprises du Var. Du design responsive à l'optimisation de votre référencement local, votre développeur web à Saint-Tropez transforme votre vision en résultats concrets. Devis gratuit sous 24h.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-fill">Devis gratuit <span class="arrow">→</span></a>
+        <a href="#portfolio" class="btn btn-outline">Exemples de sites</a>
+      </div>
+      <div class="hero-meta">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="hero-meta-block">
+            <span class="hero-meta-label">Localisation</span>
+            <span class="hero-meta-val">Golfe de Saint-Tropez, Var 83</span>
+          </div>
+          <div class="hero-meta-block">
+            <span class="hero-meta-label">Coordonnées</span>
+            <span class="hero-meta-val">43.2677° N — 6.6407° E</span>
+          </div>
+          <span class="hero-status"><span class="dot-live"></span> Disponible pour un nouveau projet</span>
+        </div>
+        <div class="hero-map" aria-hidden="true">
+          <div></div><div></div>
+          <div style="display:flex;align-items:center;justify-content:center;position:relative"><span class="hero-map-dot"></span></div>
+          <div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ==================== MARQUEE 1 — Double opposite ==================== -->
-<div class="marquee-block" aria-hidden="true">
-  <div class="marquee-row">
-    <span class="marquee-text outline">Création Site Web <span class="dot"></span></span>
-    <span class="marquee-text soft">Référencement SEO <span class="dot"></span></span>
-    <span class="marquee-text outline">Webdesign Var 83 <span class="dot"></span></span>
-    <span class="marquee-text soft">Développeur Freelance <span class="dot"></span></span>
-    <span class="marquee-text outline">Site Internet Pro <span class="dot"></span></span>
-    <span class="marquee-text soft">Saint-Tropez Digital <span class="dot"></span></span>
-  </div>
-  <div class="marquee-row reverse">
-    <span class="marquee-text accent-soft">Cavalaire-sur-Mer <span class="dot"></span></span>
-    <span class="marquee-text outline">Sainte-Maxime <span class="dot"></span></span>
-    <span class="marquee-text accent-soft">Cogolin <span class="dot"></span></span>
-    <span class="marquee-text outline">La Croix-Valmer <span class="dot"></span></span>
-    <span class="marquee-text accent-soft">Côte d'Azur <span class="dot"></span></span>
-    <span class="marquee-text outline">Ramatuelle <span class="dot"></span></span>
+<!-- ==================== TICKER ==================== -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-row">
+    <span class="ticker-item">Création Site Web <span class="dot"></span></span>
+    <span class="ticker-item">Référencement SEO <span class="dot"></span></span>
+    <span class="ticker-item">Webdesign Var 83 <span class="dot"></span></span>
+    <span class="ticker-item">Développeur Freelance <span class="dot"></span></span>
+    <span class="ticker-item">Saint-Tropez · Cavalaire · Sainte-Maxime · Cogolin <span class="dot"></span></span>
   </div>
 </div>
 
@@ -230,52 +202,64 @@
 <section class="section" id="services">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 01 — Services</div>
-      <h2 class="section-title">Création web <span class="thin">&</span><br>services digitaux</h2>
-      <p class="section-sub reveal-up">Développement de sites internet, référencement SEO local, social media et publicité en ligne dans le Golfe de Saint-Tropez.</p>
+      <div class="section-num">02 — Services</div>
+      <h2 class="section-title">Création web <span class="thin">&</span> services digitaux</h2>
+      <p class="section-sub">Développement de sites internet, référencement SEO local, social media et publicité en ligne dans le Golfe de Saint-Tropez.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🌐</div>
+    <div class="services-list">
+      <div class="service-row reveal-up">
+        <span class="service-row-num">01</span>
+        <span class="icon-box">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.8 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.8-3.8-9s1.3-6.4 3.8-9z"/></svg>
+        </span>
         <h3>Création de Site Internet</h3>
-        <p>Sites vitrines professionnels, performants et responsive pour TPE, PME, artisans et commerces du Var. Code optimisé et design sur-mesure.</p>
-        <div class="service-price">À partir de 600€</div>
-        <a href="#contact" class="service-link">Demander un devis <span>→</span></a>
+        <p>Sites vitrines professionnels, performants et responsive pour TPE, PME, artisans et commerces du Var.</p>
+        <span class="service-row-price">À partir de 600€</span>
       </div>
-      <div class="service-card">
-        <div class="service-icon">🔍</div>
+      <div class="service-row reveal-up">
+        <span class="service-row-num">02</span>
+        <span class="icon-box">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </span>
         <h3>Référencement SEO Local</h3>
-        <p>Optimisation Google pour être visible à Saint-Tropez, Cavalaire, Sainte-Maxime et dans tout le Var. Plus de clients qualifiés.</p>
-        <div class="service-price">80€ / page</div>
-        <a href="#contact" class="service-link">Demander un devis <span>→</span></a>
+        <p>Optimisation Google pour être visible à Saint-Tropez, Cavalaire, Sainte-Maxime et dans tout le Var.</p>
+        <span class="service-row-price">80€ / page</span>
       </div>
-      <div class="service-card">
-        <div class="service-icon">📱</div>
+      <div class="service-row reveal-up">
+        <span class="service-row-num">03</span>
+        <span class="icon-box">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg>
+        </span>
         <h3>Gestion Réseaux Sociaux</h3>
-        <p>Community management et stratégie social media pour développer votre notoriété locale. Contenu engageant et planification.</p>
-        <div class="service-price">À partir de 149€/mois</div>
-        <a href="#contact" class="service-link">Demander un devis <span>→</span></a>
+        <p>Community management et stratégie social media pour développer votre notoriété locale.</p>
+        <span class="service-row-price">Dès 149€/mois</span>
       </div>
-      <div class="service-card">
-        <div class="service-icon">📣</div>
+      <div class="service-row reveal-up">
+        <span class="service-row-num">04</span>
+        <span class="icon-box">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 001 1h2l7 4V5L6 9H4a1 1 0 00-1 1z"/><path d="M17 9a4 4 0 010 6"/><path d="M20 6a8 8 0 010 12"/></svg>
+        </span>
         <h3>Google Ads & Meta Ads</h3>
-        <p>Campagnes publicitaires ciblées pour les entreprises du Var. ROI maximisé, audience locale et nationale précise.</p>
-        <div class="service-price">À partir de 250€/mois</div>
-        <a href="#contact" class="service-link">Demander un devis <span>→</span></a>
+        <p>Campagnes publicitaires ciblées pour les entreprises du Var. ROI maximisé, audience locale et nationale.</p>
+        <span class="service-row-price">Dès 250€/mois</span>
       </div>
-      <div class="service-card">
-        <div class="service-icon">🎨</div>
+      <div class="service-row reveal-up">
+        <span class="service-row-num">05</span>
+        <span class="icon-box">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.2"/><circle cx="17.5" cy="10.5" r="1.2"/><circle cx="8.5" cy="7.5" r="1.2"/><circle cx="6.5" cy="12.5" r="1.2"/><path d="M12 2C6.5 2 2 6.5 2 12c0 3 1.3 4 3.5 4H8c1 0 1.5.7 1.5 1.5S9 19 9 20c0 1 1 2 3 2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+        </span>
         <h3>Création de Logo & Identité</h3>
-        <p>Identité visuelle professionnelle et mémorable. Logo sur-mesure qui reflète votre marque et votre activité.</p>
-        <div class="service-price">À partir de 250€</div>
-        <a href="#contact" class="service-link">Demander un devis <span>→</span></a>
+        <p>Identité visuelle professionnelle et mémorable, sur-mesure, qui reflète votre marque et votre activité.</p>
+        <span class="service-row-price">À partir de 250€</span>
       </div>
-      <div class="service-card">
-        <div class="service-icon">🛠️</div>
+      <div class="service-row reveal-up">
+        <span class="service-row-num">06</span>
+        <span class="icon-box">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3l3 3L8.4 18.6 4 20l1.4-4.4 9.3-9.3z"/><path d="M18 3l3 3"/></svg>
+        </span>
         <h3>Maintenance Site Internet</h3>
-        <p>Maintenance technique, mises à jour sécurité et support réactif. Votre site web reste rapide et protégé en permanence.</p>
-        <div class="service-price">À partir de 100€/mois</div>
-        <a href="#contact" class="service-link">Demander un devis <span>→</span></a>
+        <p>Maintenance technique, mises à jour sécurité et support réactif. Votre site reste rapide et protégé.</p>
+        <span class="service-row-price">Dès 100€/mois</span>
       </div>
     </div>
   </div>
@@ -283,16 +267,16 @@
 
 <!-- Divider -->
 <div class="section-divider" aria-hidden="true">
-  <div class="divider-text" data-dir="left">CRÉATION SITE WEB — SAINT-TROPEZ — RÉFÉRENCEMENT SEO — VAR 83 — DÉVELOPPEUR FREELANCE — CAVALAIRE — DESIGN RESPONSIVE — COGOLIN — SITE VITRINE — CÔTE D'AZUR — WEBDESIGN PRO — SAINTE-MAXIME</div>
+  <div class="divider-text" data-dir="left">CRÉATION SITE WEB — SAINT-TROPEZ — RÉFÉRENCEMENT SEO — VAR 83 — DÉVELOPPEUR FREELANCE — CAVALAIRE — DESIGN RESPONSIVE — COGOLIN — SITE VITRINE — CÔTE D'AZUR — WEBDESIGN PRO — SAINTE-MAXIME —</div>
 </div>
 
 <!-- ==================== APPROCHE ==================== -->
-<section class="section process-section" id="approche">
+<section class="section" id="approche">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 02 — Approche</div>
-      <h2 class="section-title">Votre site web<br><span class="thin">clé en main</span> en 7 jours</h2>
-      <p class="section-sub reveal-up">De l'audit de vos besoins à la mise en ligne, un processus rapide et transparent pour votre projet web.</p>
+      <div class="section-num">03 — Approche</div>
+      <h2 class="section-title">Votre site web <span class="thin">clé en main</span> en 7 jours</h2>
+      <p class="section-sub">De l'audit de vos besoins à la mise en ligne, un processus rapide et transparent pour votre projet web.</p>
     </div>
     <div class="process-steps">
       <div class="process-step">
@@ -321,20 +305,20 @@
 
 <!-- Divider -->
 <div class="section-divider" aria-hidden="true">
-  <div class="divider-text" data-dir="right">DÉVELOPPEUR WEB — CAVALAIRE — SAINTE-MAXIME — COGOLIN — LA CROIX-VALMER — RAMATUELLE — GASSIN — GRIMAUD — PLAN-DE-LA-TOUR — GOLFE DE SAINT-TROPEZ — WEBMASTER VAR 83 — CÔTE D'AZUR</div>
+  <div class="divider-text" data-dir="right">DÉVELOPPEUR WEB — CAVALAIRE — SAINTE-MAXIME — COGOLIN — LA CROIX-VALMER — RAMATUELLE — GASSIN — GRIMAUD — PLAN-DE-LA-TOUR — GOLFE DE SAINT-TROPEZ — WEBMASTER VAR 83 — CÔTE D'AZUR —</div>
 </div>
 
 <!-- ==================== FORMULES ==================== -->
 <section class="section" id="formules">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 03 — Formules</div>
-      <h2 class="section-title">Tarifs <span class="thin">création</span><br>site internet Var</h2>
-      <p class="section-sub reveal-up">Sites web professionnels dès 600€. Trois formules adaptées aux entreprises, artisans et commerces du Golfe de Saint-Tropez.</p>
+      <div class="section-num">04 — Formules</div>
+      <h2 class="section-title">Tarifs <span class="thin">création</span> site internet Var</h2>
+      <p class="section-sub">Sites web professionnels dès 600€. Trois formules adaptées aux entreprises, artisans et commerces du Golfe de Saint-Tropez.</p>
     </div>
     <div class="pricing-grid">
       <!-- Starter -->
-      <div class="pricing-card">
+      <div class="pricing-card reveal-up">
         <div class="pricing-header">
           <div class="pricing-badge-spacer"></div>
           <div class="pricing-name">Starter</div>
@@ -347,12 +331,12 @@
           <div class="pricing-feat"><span class="ck">✓</span> Optimisation SEO de base</div>
           <div class="pricing-feat"><span class="ck">✓</span> Formulaire de contact</div>
           <div class="pricing-feat"><span class="ck">✓</span> Livraison en 7 jours</div>
-          <div class="pricing-feat" style="opacity:.7"><span class="ck" style="color:var(--text-dim)">ⓘ</span> Hébergement + domaine à votre charge</div>
+          <div class="pricing-feat" style="opacity:.65"><span class="ck">ⓘ</span> Hébergement + domaine à votre charge</div>
         </div>
         <a href="#contact" class="pricing-cta">Choisir Starter</a>
       </div>
       <!-- Business -->
-      <div class="pricing-card featured">
+      <div class="pricing-card featured reveal-up">
         <div class="pricing-header">
           <div class="pricing-badge">Recommandée</div>
           <div class="pricing-name">Business</div>
@@ -366,17 +350,17 @@
           <div class="pricing-feat"><span class="ck">✓</span> Galerie photos / Portfolio</div>
           <div class="pricing-feat"><span class="ck">✓</span> Formulaire avancé</div>
           <div class="pricing-feat"><span class="ck">✓</span> Livraison en 10 jours</div>
-          <div class="pricing-feat" style="opacity:.7"><span class="ck" style="color:var(--text-dim)">ⓘ</span> Hébergement + domaine à votre charge</div>
+          <div class="pricing-feat" style="opacity:.65"><span class="ck">ⓘ</span> Hébergement + domaine à votre charge</div>
         </div>
         <a href="#contact" class="pricing-cta">Choisir Business</a>
       </div>
       <!-- Premium -->
-      <div class="pricing-card">
+      <div class="pricing-card reveal-up">
         <div class="pricing-header">
           <div class="pricing-badge-spacer"></div>
           <div class="pricing-name">Premium</div>
           <div class="pricing-sub">Sur-mesure</div>
-          <div class="pricing-price" style="font-size:36px;">Sur devis</div>
+          <div class="pricing-price" style="font-size:32px">Sur devis</div>
         </div>
         <div class="pricing-features">
           <div class="pricing-feat"><span class="ck">✓</span> Pages illimitées</div>
@@ -385,41 +369,40 @@
           <div class="pricing-feat"><span class="ck">✓</span> Performance maximale</div>
           <div class="pricing-feat"><span class="ck">✓</span> Support prioritaire</div>
           <div class="pricing-feat"><span class="ck">✓</span> Révisions illimitées</div>
-          <div class="pricing-feat" style="opacity:.7"><span class="ck" style="color:var(--text-dim)">ⓘ</span> Hébergement + domaine à votre charge</div>
+          <div class="pricing-feat" style="opacity:.65"><span class="ck">ⓘ</span> Hébergement + domaine à votre charge</div>
         </div>
         <a href="#contact" class="pricing-cta">Demander un devis</a>
       </div>
     </div>
-    <div style="text-align:center;margin-top:36px" class="reveal-up">
+    <div style="text-align:center;margin-top:32px" class="reveal-up">
       <p style="font-size:14px;color:var(--text-muted);line-height:1.7;max-width:680px;margin:0 auto">
-        <span style="color:var(--accent-light)">ℹ️</span> L'hébergement et le nom de domaine sont à la charge du client. Je vous accompagne dans le choix et la configuration.
+        L'hébergement et le nom de domaine sont à la charge du client. Je vous accompagne dans le choix et la configuration.
       </p>
     </div>
   </div>
 </section>
 
-<!-- Marquee 2 -->
-<div class="marquee-block" aria-hidden="true">
-  <div class="marquee-row reverse">
-    <span class="marquee-text outline">Freelance web Var <span class="dot"></span></span>
-    <span class="marquee-text accent-soft">Création site vitrine <span class="dot"></span></span>
-    <span class="marquee-text outline">Développeur freelance <span class="dot"></span></span>
-    <span class="marquee-text accent-soft">Référencement Google <span class="dot"></span></span>
-    <span class="marquee-text outline">Webmaster Saint-Tropez <span class="dot"></span></span>
-    <span class="marquee-text accent-soft">Devis gratuit 24h <span class="dot"></span></span>
+<!-- Ticker 2 -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-row">
+    <span class="ticker-item">Freelance Web Var <span class="dot"></span></span>
+    <span class="ticker-item">Création Site Vitrine <span class="dot"></span></span>
+    <span class="ticker-item">Référencement Google <span class="dot"></span></span>
+    <span class="ticker-item">Webmaster Saint-Tropez <span class="dot"></span></span>
+    <span class="ticker-item">Devis Gratuit Sous 24h <span class="dot"></span></span>
   </div>
 </div>
 
 <!-- ==================== PORTFOLIO ==================== -->
-<section class="section" id="portfolio" style="background:var(--bg-alt);border-top:1px solid var(--border)">
+<section class="section" id="portfolio" style="background:var(--bg-alt)">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 04 — Portfolio</div>
-      <h2 class="section-title">Sites web <span class="thin">créés</span><br>dans le Var</h2>
-      <p class="section-sub reveal-up">Trois sites de démonstration, un par formule, pour montrer le niveau de finition auquel vous pouvez vous attendre. Aucun client fictif, juste le style et la structure réels de chaque offre.</p>
+      <div class="section-num">05 — Portfolio</div>
+      <h2 class="section-title">Sites web <span class="thin">créés</span> dans le Var</h2>
+      <p class="section-sub">Trois sites de démonstration, un par formule, pour montrer le niveau de finition auquel vous pouvez vous attendre. Aucun client fictif, juste le style et la structure réels de chaque offre.</p>
     </div>
     <div class="portfolio-list">
-      <a href="https://fvccrew.github.io/mdz-piscine/" target="_blank" rel="noopener" class="portfolio-row" data-cursor="Voir le site">
+      <a href="https://fvccrew.github.io/mdz-piscine/" target="_blank" rel="noopener" class="portfolio-row reveal-up">
         <div class="portfolio-row-inner">
           <div class="portfolio-row-num">01</div>
           <div class="portfolio-row-info">
@@ -428,10 +411,10 @@
             <p class="portfolio-row-desc">Site vitrine 3 pages pour une entreprise de piscines : présentation des services, galerie de réalisations et contact direct.</p>
             <span class="portfolio-row-link">Voir le site <span class="arrow">↗</span></span>
           </div>
-          <div class="portfolio-row-img"><img src="assets/images/exemple-starter.webp" alt="Aperçu du site de démonstration MDZ Piscine, formule Starter" loading="lazy" width="1920" height="909"></div>
+          <div class="portfolio-row-img"><img src="assets/images/exemple-starter.webp" alt="Aperçu du site de démonstration MDZ Piscine, formule Starter" loading="lazy"></div>
         </div>
       </a>
-      <a href="https://fvccrew.github.io/da-enzo/" target="_blank" rel="noopener" class="portfolio-row" data-cursor="Voir le site">
+      <a href="https://fvccrew.github.io/da-enzo/" target="_blank" rel="noopener" class="portfolio-row reveal-up">
         <div class="portfolio-row-inner">
           <div class="portfolio-row-num">02</div>
           <div class="portfolio-row-info">
@@ -440,10 +423,10 @@
             <p class="portfolio-row-desc">Site 5 pages pour un restaurant : carte, ambiance et prise de contact mises en scène avec un design premium sur-mesure.</p>
             <span class="portfolio-row-link">Voir le site <span class="arrow">↗</span></span>
           </div>
-          <div class="portfolio-row-img"><img src="assets/images/exemple-business.webp" alt="Aperçu du site de démonstration Da Enzo, formule Business" loading="lazy" width="1920" height="911"></div>
+          <div class="portfolio-row-img"><img src="assets/images/exemple-business.webp" alt="Aperçu du site de démonstration Da Enzo, formule Business" loading="lazy"></div>
         </div>
       </a>
-      <a href="https://fvccrew.github.io/st-prestige/" target="_blank" rel="noopener" class="portfolio-row" data-cursor="Voir le site">
+      <a href="https://fvccrew.github.io/st-prestige/" target="_blank" rel="noopener" class="portfolio-row reveal-up">
         <div class="portfolio-row-inner">
           <div class="portfolio-row-num">03</div>
           <div class="portfolio-row-info">
@@ -452,7 +435,7 @@
             <p class="portfolio-row-desc">Site sur-mesure avec animations et interactions poussées. Positionnement haut de gamme pour une clientèle exigeante.</p>
             <span class="portfolio-row-link">Voir le site <span class="arrow">↗</span></span>
           </div>
-          <div class="portfolio-row-img"><img src="assets/images/exemple-premium.webp" alt="Aperçu du site de démonstration ST Prestige, formule Premium" loading="lazy" width="1920" height="913"></div>
+          <div class="portfolio-row-img"><img src="assets/images/exemple-premium.webp" alt="Aperçu du site de démonstration ST Prestige, formule Premium" loading="lazy"></div>
         </div>
       </a>
     </div>
@@ -461,60 +444,60 @@
 
 <!-- Divider -->
 <div class="section-divider" aria-hidden="true">
-  <div class="divider-text" data-dir="left">SITE INTERNET — CÔTE D'AZUR — WEBDESIGN — GOLFE DE SAINT-TROPEZ — ARTISANS — RESTAURANTS — HÔTELS — COMMERCES — PME — FREELANCE — DEVIS GRATUIT — CRÉATION WEB SUR-MESURE</div>
+  <div class="divider-text" data-dir="left">SITE INTERNET — CÔTE D'AZUR — WEBDESIGN — GOLFE DE SAINT-TROPEZ — ARTISANS — RESTAURANTS — HÔTELS — COMMERCES — PME — FREELANCE — DEVIS GRATUIT — CRÉATION WEB SUR-MESURE —</div>
 </div>
 
 <!-- ==================== ZONES D'INTERVENTION ==================== -->
 <section class="section" id="zones">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 05 — Zones d'intervention</div>
-      <h2 class="section-title">Développeur web <span class="thin">dans le</span><br>Golfe de Saint-Tropez</h2>
-      <p class="section-sub reveal-up">Basé dans le Golfe de Saint-Tropez, j'interviens dans tout le Var et la France entière en distanciel.</p>
+      <div class="section-num">06 — Zones d'intervention</div>
+      <h2 class="section-title">Développeur web <span class="thin">dans le</span> Golfe de Saint-Tropez</h2>
+      <p class="section-sub">Basé dans le Golfe de Saint-Tropez, j'interviens dans tout le Var et la France entière en distanciel.</p>
     </div>
 
     <div class="services-grid zones-grid-index">
-      <a href="creation-site-internet-saint-tropez.html" class="service-card" style="text-decoration:none;color:inherit">
-        <div class="service-icon">📍</div>
+      <a href="creation-site-internet-saint-tropez.html" class="service-card">
+        <span class="icon-box"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
         <h3>Saint-Tropez</h3>
         <p>Sites internet pour commerces, restaurants, hôtels et entreprises de Saint-Tropez. Référencement SEO local.</p>
-        <span class="zone-link">En savoir plus <span>→</span></span>
+        <span class="zone-link">En savoir plus <span class="arrow">→</span></span>
       </a>
-      <a href="creation-site-internet-cavalaire.html" class="service-card" style="text-decoration:none;color:inherit">
-        <div class="service-icon">📍</div>
+      <a href="creation-site-internet-cavalaire.html" class="service-card">
+        <span class="icon-box"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
         <h3>Cavalaire-sur-Mer</h3>
         <p>Sites modernes pour les professionnels de Cavalaire. Design responsive et accompagnement digital.</p>
-        <span class="zone-link">En savoir plus <span>→</span></span>
+        <span class="zone-link">En savoir plus <span class="arrow">→</span></span>
       </a>
-      <a href="creation-site-internet-sainte-maxime.html" class="service-card" style="text-decoration:none;color:inherit">
-        <div class="service-icon">📍</div>
+      <a href="creation-site-internet-sainte-maxime.html" class="service-card">
+        <span class="icon-box"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
         <h3>Sainte-Maxime</h3>
         <p>Création de sites vitrines performants, référencement Google pour les entreprises du bord de mer.</p>
-        <span class="zone-link">En savoir plus <span>→</span></span>
+        <span class="zone-link">En savoir plus <span class="arrow">→</span></span>
       </a>
-      <a href="creation-site-internet-cogolin.html" class="service-card" style="text-decoration:none;color:inherit">
-        <div class="service-icon">📍</div>
+      <a href="creation-site-internet-cogolin.html" class="service-card">
+        <span class="icon-box"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
         <h3>Cogolin</h3>
         <p>Sites sur-mesure pour les artisans, commerces et PME de Cogolin. Webdesign moderne et SEO.</p>
-        <span class="zone-link">En savoir plus <span>→</span></span>
+        <span class="zone-link">En savoir plus <span class="arrow">→</span></span>
       </a>
-      <a href="creation-site-internet-la-croix-valmer.html" class="service-card" style="text-decoration:none;color:inherit">
-        <div class="service-icon">📍</div>
+      <a href="creation-site-internet-la-croix-valmer.html" class="service-card">
+        <span class="icon-box"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
         <h3>La Croix-Valmer</h3>
         <p>Développement web professionnel. Sites optimisés pour le référencement local.</p>
-        <span class="zone-link">En savoir plus <span>→</span></span>
+        <span class="zone-link">En savoir plus <span class="arrow">→</span></span>
       </a>
-      <a href="developpeur-web-var.html" class="service-card" style="text-decoration:none;color:inherit">
-        <div class="service-icon">🇫🇷</div>
+      <a href="developpeur-web-var.html" class="service-card">
+        <span class="icon-box"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.8 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.8-3.8-9s1.3-6.4 3.8-9z"/></svg></span>
         <h3>Tout le Var & France</h3>
         <p>Disponible dans tout le département du Var et partout en France en distanciel.</p>
-        <span class="zone-link">En savoir plus <span>→</span></span>
+        <span class="zone-link">En savoir plus <span class="arrow">→</span></span>
       </a>
     </div>
 
-    <div style="text-align:center;margin-top:40px" class="reveal-up">
+    <div style="text-align:center;margin-top:36px" class="reveal-up">
       <p style="font-size:15px;color:var(--text-muted);line-height:1.7;max-width:700px;margin:0 auto">
-        Également disponible à <strong style="color:var(--text)">Gassin, Grimaud, Plan-de-la-Tour, Le Lavandou, Fréjus, Draguignan, Toulon, Hyères</strong> et <strong style="color:var(--accent-light)">partout en France</strong> en distanciel via visio et suivi en ligne.
+        Également disponible à <strong style="color:var(--text)">Gassin, Grimaud, Plan-de-la-Tour, Le Lavandou, Fréjus, Draguignan, Toulon, Hyères</strong> et <strong style="color:var(--accent)">partout en France</strong> en distanciel via visio et suivi en ligne.
       </p>
     </div>
   </div>
@@ -522,30 +505,29 @@
 
 <!-- Divider -->
 <div class="section-divider" aria-hidden="true">
-  <div class="divider-text" data-dir="right">SAINT-TROPEZ — CAVALAIRE — COGOLIN — SAINTE-MAXIME — LA CROIX-VALMER — RAMATUELLE — GASSIN — GRIMAUD — VAR 83 — CÔTE D'AZUR — FRANCE ENTIÈRE</div>
+  <div class="divider-text" data-dir="right">SAINT-TROPEZ — CAVALAIRE — COGOLIN — SAINTE-MAXIME — LA CROIX-VALMER — RAMATUELLE — GASSIN — GRIMAUD — VAR 83 — CÔTE D'AZUR — FRANCE ENTIÈRE —</div>
 </div>
 
 <!-- ==================== À PROPOS ==================== -->
 <section class="section" id="a-propos">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 06 — À propos</div>
-      <h2 class="section-title">Votre développeur <span class="thin">web</span><br>à Saint-Tropez</h2>
+      <div class="section-num">07 — À propos</div>
+      <h2 class="section-title">Votre développeur <span class="thin">web</span> à Saint-Tropez</h2>
     </div>
     <div class="about-grid">
-      <div class="about-img-wrap">
-        <img src="assets/images/stephane-miliziano.webp" alt="Stéphane Miliziano, fondateur de Weboost Studio" class="about-img" loading="lazy" width="800" height="1027">
-        <div class="about-img-accent"></div>
+      <div class="about-img-wrap reveal-up">
+        <img src="assets/images/stephane-miliziano.webp" alt="Stéphane Miliziano, fondateur de Weboost Studio" class="about-img" loading="lazy">
         <div class="about-img-coords">Stéphane Miliziano — Fondateur</div>
       </div>
-      <div class="about-content">
+      <div class="about-content reveal-up">
         <h3>Webmaster freelance spécialisé création de sites internet</h3>
         <p>Développeur web implanté dans le Golfe de Saint-Tropez, je conçois des sites internet performants, optimisés pour le référencement Google et pensés pour convertir vos visiteurs en clients.</p>
         <p>J'accompagne les TPE, PME, artisans, restaurants et hôtels du Var dans leur transformation digitale. Chaque site web est développé sur-mesure avec un design responsive adapté à tous les écrans.</p>
         <div class="about-principles">
-          <div class="about-principle reveal-up"><span class="about-principle-num">01</span><p><strong>Du code, pas un template.</strong> Chaque site est écrit sur-mesure — HTML, CSS et JS propres, sans surcouche inutile ni page builder.</p></div>
-          <div class="about-principle reveal-up"><span class="about-principle-num">02</span><p><strong>Le SEO dès la conception.</strong> Structure, vitesse et mots-clés locaux sont pensés avant la première ligne de design, pas ajoutés après coup.</p></div>
-          <div class="about-principle reveal-up"><span class="about-principle-num">03</span><p><strong>Un seul interlocuteur.</strong> Du premier échange à la mise en ligne, vous parlez directement à la personne qui code votre site.</p></div>
+          <div class="about-principle"><span class="about-principle-num">01</span><p><strong>Du code, pas un template.</strong> Chaque site est écrit sur-mesure — HTML, CSS et JS propres, sans surcouche inutile ni page builder.</p></div>
+          <div class="about-principle"><span class="about-principle-num">02</span><p><strong>Le SEO dès la conception.</strong> Structure, vitesse et mots-clés locaux sont pensés avant la première ligne de design, pas ajoutés après coup.</p></div>
+          <div class="about-principle"><span class="about-principle-num">03</span><p><strong>Un seul interlocuteur.</strong> Du premier échange à la mise en ligne, vous parlez directement à la personne qui code votre site.</p></div>
         </div>
         <div class="about-tags">
           <span class="about-tag">HTML / CSS / JS</span>
@@ -564,21 +546,21 @@
 <section class="section contact-section" id="contact">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 07 — Contact</div>
-      <h2 class="section-title">Devis gratuit <span class="thin">création</span><br>site web Var</h2>
-      <p class="section-sub reveal-up">Contactez votre développeur web à Saint-Tropez. Devis gratuit sous 24h, réponse rapide et accompagnement personnalisé.</p>
+      <div class="section-num">08 — Contact</div>
+      <h2 class="section-title">Devis gratuit <span class="thin">création</span> site web Var</h2>
+      <p class="section-sub">Contactez votre développeur web à Saint-Tropez. Devis gratuit sous 24h, réponse rapide et accompagnement personnalisé.</p>
     </div>
     <div class="contact-grid">
       <form class="contact-form" id="contactForm" action="contact.php" method="POST">
         <!-- Honeypot anti-spam (hidden) -->
         <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-row">
-          <div class="field"><label for="name">Nom complet</label><input type="text" id="name" name="name" placeholder="Votre nom" required></div>
-          <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="votre@email.com" required></div>
+          <div class="field reveal-up"><label for="name">Nom complet</label><input type="text" id="name" name="name" placeholder="Votre nom" required></div>
+          <div class="field reveal-up"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="votre@email.com" required></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="phone">Téléphone</label><input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX"></div>
-          <div class="field"><label for="project">Type de projet</label>
+          <div class="field reveal-up"><label for="phone">Téléphone</label><input type="tel" id="phone" name="phone" placeholder="06 XX XX XX XX"></div>
+          <div class="field reveal-up"><label for="project">Type de projet</label>
             <select id="project" name="project">
               <option value="">Sélectionnez votre besoin</option>
               <option value="starter">Site Starter (3 pages — 600€)</option>
@@ -591,25 +573,37 @@
             </select>
           </div>
         </div>
-        <div class="field"><label for="message">Votre message</label><textarea id="message" name="message" placeholder="Décrivez votre projet, vos objectifs..."></textarea></div>
+        <div class="field reveal-up"><label for="message">Votre message</label><textarea id="message" name="message" placeholder="Décrivez votre projet, vos objectifs..."></textarea></div>
         <button type="submit" class="btn btn-fill" id="submitBtn" style="width:fit-content">Envoyer le message <span class="arrow">→</span></button>
-        <div id="formFeedback" style="display:none;margin-top:16px;padding:16px 20px;border-radius:8px;font-size:14px;font-weight:500;transition:opacity 0.5s"></div>
+        <div id="formFeedback" style="display:none;margin-top:16px;padding:14px 18px;border:1px solid;font-size:14px;font-weight:500;transition:opacity 0.5s"></div>
       </form>
       <div class="contact-info">
-        <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:contact@weboost-studio.fr">contact@weboost-studio.fr</a></div></div></div>
-        <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-label">Téléphone</div><div class="contact-val"><a href="tel:+33669371667">06 69 37 16 67</a></div></div></div>
-        <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Localisation</div><div class="contact-val">Golfe de Saint-Tropez, Var, France</div></div></div>
-        <div class="contact-item"><div class="contact-icon">⚡</div><div><div class="contact-label">Disponibilité</div><div class="contact-val">Réponse sous 24h — Lun-Ven, 9h-18h</div></div></div>
+        <div class="contact-item reveal-up">
+          <span class="contact-icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 6l9 7 9-7"/></svg></span>
+          <div><div class="contact-label">Email</div><div class="contact-val"><a href="mailto:contact@weboost-studio.fr">contact@weboost-studio.fr</a></div></div>
+        </div>
+        <div class="contact-item reveal-up">
+          <span class="contact-icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 2.9a2 2 0 01-.4 2.1L8.1 10a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.4 1.9.6 2.9.7a2 2 0 011.7 2z"/></svg></span>
+          <div><div class="contact-label">Téléphone</div><div class="contact-val"><a href="tel:+33669371667">06 69 37 16 67</a></div></div>
+        </div>
+        <div class="contact-item reveal-up">
+          <span class="contact-icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
+          <div><div class="contact-label">Localisation</div><div class="contact-val">Golfe de Saint-Tropez, Var, France</div></div>
+        </div>
+        <div class="contact-item reveal-up">
+          <span class="contact-icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <div><div class="contact-label">Disponibilité</div><div class="contact-val">Réponse sous 24h — Lun-Ven, 9h-18h</div></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ==================== FAQ ==================== -->
-<section class="section section-alt" id="faq">
+<section class="section" id="faq" style="background:var(--bg-alt)">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> FAQ</div>
+      <div class="section-num">FAQ</div>
       <h2 class="section-title">Questions <span class="thin">fréquentes</span></h2>
     </div>
     <div class="faq-list">
@@ -647,18 +641,19 @@
 
 </main>
 
-<!-- ==================== FOOTER — dernière scène ==================== -->
+<!-- ==================== FOOTER ==================== -->
 <footer class="footer">
   <div class="footer-cta">
-    <div class="footer-cta-glow" aria-hidden="true"></div>
     <div class="container footer-cta-inner">
-      <div class="footer-cta-eyebrow"><span class="dash"></span> Un projet en tête ?</div>
-      <h2 class="footer-cta-title">Parlons de<br><span class="thin">votre site</span></h2>
-      <a href="mailto:contact@weboost-studio.fr" class="footer-cta-email">contact@weboost-studio.fr</a>
-      <div class="footer-cta-meta">
-        <span><span class="dot-live"></span> Disponible — réponse sous 24h</span>
-        <span>📞 <a href="tel:+33669371667">06 69 37 16 67</a></span>
-        <span>📍 Golfe de Saint-Tropez, Var</span>
+      <div class="footer-cta-eyebrow">Un projet en tête ?</div>
+      <h2 class="footer-cta-title">Parlons de <span class="thin">votre site</span></h2>
+      <div class="footer-cta-right">
+        <a href="mailto:contact@weboost-studio.fr" class="footer-cta-email">contact@weboost-studio.fr</a>
+        <div class="footer-cta-meta">
+          <span><span class="dot-live"></span> Disponible — réponse sous 24h</span>
+          <span><a href="tel:+33669371667">06 69 37 16 67</a></span>
+          <span>Golfe de Saint-Tropez, Var</span>
+        </div>
       </div>
     </div>
   </div>
@@ -701,41 +696,38 @@ if (form) {
     const btn = document.getElementById('submitBtn');
     const feedback = document.getElementById('formFeedback');
     const originalText = btn.innerHTML;
-    
+
     btn.innerHTML = 'Envoi en cours...';
     btn.style.opacity = '0.7';
     btn.disabled = true;
     feedback.style.display = 'none';
-    
+
     try {
       const response = await fetch('contact.php', {
         method: 'POST',
         body: new FormData(form)
       });
       const data = await response.json();
-      
+
       feedback.style.display = 'block';
       if (data.success) {
-        feedback.style.background = 'rgba(34,197,94,0.15)';
-        feedback.style.color = '#22c55e';
-        feedback.style.border = '1px solid rgba(34,197,94,0.3)';
+        feedback.style.borderColor = '#15803d';
+        feedback.style.color = '#15803d';
         feedback.textContent = data.message;
         form.reset();
         setTimeout(() => { feedback.style.opacity = '0'; setTimeout(() => { feedback.style.display = 'none'; feedback.style.opacity = '1'; }, 500); }, 5000);
       } else {
-        feedback.style.background = 'rgba(239,68,68,0.15)';
-        feedback.style.color = '#ef4444';
-        feedback.style.border = '1px solid rgba(239,68,68,0.3)';
+        feedback.style.borderColor = '#b91c1c';
+        feedback.style.color = '#b91c1c';
         feedback.textContent = data.message;
       }
     } catch (err) {
       feedback.style.display = 'block';
-      feedback.style.background = 'rgba(239,68,68,0.15)';
-      feedback.style.color = '#ef4444';
-      feedback.style.border = '1px solid rgba(239,68,68,0.3)';
+      feedback.style.borderColor = '#b91c1c';
+      feedback.style.color = '#b91c1c';
       feedback.textContent = 'Erreur de connexion. Contactez-moi directement à contact@weboost-studio.fr';
     }
-    
+
     btn.innerHTML = originalText;
     btn.style.opacity = '1';
     btn.disabled = false;
@@ -747,7 +739,7 @@ if (form) {
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-inner">
     <div class="cookie-text">
-      <p><strong>🍪 Cookies</strong></p>
+      <p><strong>Cookies</strong></p>
       <p>Ce site utilise uniquement des cookies techniques essentiels au bon fonctionnement (navigation, mémorisation de vos préférences). Aucun cookie de tracking, publicité ou analyse n'est utilisé. Vos données ne sont pas transmises à des tiers. <a href="politique-confidentialite.html">En savoir plus</a></p>
     </div>
     <button class="cookie-btn" onclick="acceptCookies()">Accepter</button>

@@ -17,166 +17,128 @@
 <meta property="og:url" content="https://www.weboost-studio.fr/creation-site-internet-cogolin.html">
 <meta property="og:locale" content="fr_FR">
 
-<link rel="preload" href="assets/fonts/Poppins-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<style>/* ============================================
-   WEBOOST STUDIO — PAGES VILLES
-   100% autonome, sans GSAP, ultra-léger
-   ============================================ */
-
-:root {
-  --bg: #050505;
-  --bg-alt: #0a0a0a;
-  --bg-card: #0f0f0f;
-  --bg-card-hover: #161616;
-  --white: #ffffff;
-  --text: #ebebeb;
-  --text-muted: #a0a0a0;
-  --text-dim: #737373;
-  --accent: #e3a836;
-  --accent-light: #f4c752;
-  --accent-glow: rgba(227,168,54,0.14);
-  --navy-glow: #263353;
-  --ink: #0b0f1a;
-  --border: rgba(255,255,255,0.08);
-  --border-hover: rgba(255,255,255,0.15);
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --ease: cubic-bezier(0.16,1,0.3,1);
-  --nav-h: 72px;
-  --container: 1280px;
-  --px: clamp(20px,5vw,64px);
+<style>
+:root{
+  --bg:#ffffff;--bg-alt:#fafafa;--ink:#111111;--white:#ffffff;
+  --text:#171717;--text-muted:#525252;--text-dim:#8a8a8a;
+  --accent:#a16207;--accent-light:#c17f1a;
+  --border:#e5e5e5;--border-strong:#111111;
+  --font:'Inter',system-ui,-apple-system,sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);--nav-h:76px;--container:1280px;--px:clamp(20px,5vw,64px);
 }
-
-/* --- Fonts locales (RGPD) --- */
 @font-face{font-family:'Inter';font-weight:400;font-display:swap;src:url('assets/fonts/Inter-Regular.woff2') format('woff2')}
 @font-face{font-family:'Inter';font-weight:500;font-display:swap;src:url('assets/fonts/Inter-Medium.woff2') format('woff2')}
 @font-face{font-family:'Inter';font-weight:600;font-display:swap;src:url('assets/fonts/Inter-SemiBold.woff2') format('woff2')}
-@font-face{font-family:'Poppins';font-weight:700;font-display:swap;src:url('assets/fonts/Poppins-Bold.woff2') format('woff2')}
-@font-face{font-family:'Poppins';font-weight:800;font-display:swap;src:url('assets/fonts/Poppins-ExtraBold.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:700;font-display:swap;src:url('assets/fonts/Inter-Bold.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:800;font-display:swap;src:url('assets/fonts/Inter-ExtraBold.woff2') format('woff2')}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-font-smoothing:antialiased;overflow-x:hidden;scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
 button{cursor:pointer;border:none;background:none;font-family:inherit;color:inherit}
 .container{max-width:var(--container);margin:0 auto;padding:0 var(--px)}
+.icon{display:block;flex-shrink:0}
 
-/* --- NAV (identique à l'accueil) --- */
-.nav{position:fixed;top:0;width:100%;height:var(--nav-h);z-index:100;transition:background .4s,backdrop-filter .4s;display:flex;align-items:center;background:rgba(5,5,5,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav{position:fixed;top:0;width:100%;height:var(--nav-h);z-index:100;display:flex;align-items:center;background:var(--bg);border-bottom:1px solid var(--border)}
 .nav-inner{max-width:var(--container);margin:0 auto;padding:0 var(--px);width:100%;height:100%;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:var(--font-heading);font-weight:800;font-size:20px;text-transform:uppercase;letter-spacing:-.5px}
-.nav-logo .accent{color:var(--accent-light)}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-link{font-size:13px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;position:relative;transition:color .3s}
-.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent);transition:width .4s var(--ease)}
-.nav-link:hover{color:var(--white)}
+.nav-logo{font-weight:800;font-size:18px;letter-spacing:-.3px}
+.nav-logo .accent{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-link{font-size:14px;font-weight:500;color:var(--text);position:relative}
+.nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--ink);transition:width .3s var(--ease)}
 .nav-link:hover::after{width:100%}
-.nav-cta{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;background:var(--accent);color:var(--ink);padding:10px 24px;border-radius:6px;transition:background .3s,transform .2s}
-.nav-cta:hover{background:var(--accent-light);transform:translateY(-1px)}
-.nav-toggle{display:none;flex-direction:column;gap:5px;width:26px;z-index:101}
-.nav-toggle span{display:block;height:2px;background:var(--white);transition:all .3s var(--ease);transform-origin:center}
+.nav-cta{font-size:14px;font-weight:600;background:var(--ink);color:var(--white);padding:11px 24px;transition:background .25s}
+.nav-cta:hover{background:var(--accent)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;width:24px;z-index:101}
+.nav-toggle span{display:block;height:2px;background:var(--ink);transition:all .3s var(--ease);transform-origin:center}
 .nav-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .nav-toggle.active span:nth-child(2){opacity:0}
 .nav-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.nav-mobile{display:flex;position:fixed;inset:0;background:rgba(5,5,5,.97);backdrop-filter:blur(40px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .4s}
+.nav-mobile{display:flex;position:fixed;inset:0;background:var(--bg);z-index:99;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:0 var(--px);opacity:0;pointer-events:none;transition:opacity .35s}
 .nav-mobile.open{opacity:1;pointer-events:all}
-.nav-mobile a{font-family:var(--font-heading);font-size:clamp(28px,6vw,48px);font-weight:800;text-transform:uppercase;letter-spacing:-1px;color:var(--text)}
+.nav-mobile a{font-size:clamp(28px,8vw,44px);font-weight:800;letter-spacing:-1px;color:var(--text);padding:12px 0;border-bottom:1px solid var(--border);width:100%}
+.nav-mobile a:last-child{border-bottom:none;color:var(--accent)}
 
-/* --- HERO --- */
-.hero{position:relative;min-height:70vh;display:flex;align-items:center;padding:calc(var(--nav-h) + 60px) 0 80px;overflow:hidden}
-.hero-glow{position:absolute;border-radius:50%;filter:blur(100px);opacity:.18;pointer-events:none}
-.hero-glow.g1{width:500px;height:500px;background:var(--accent);top:-100px;right:-100px}
-.hero-glow.g2{width:400px;height:400px;background:var(--navy-glow);bottom:-100px;left:-80px;opacity:.12}
-.hero-content{position:relative;z-index:2;max-width:900px}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--accent-light);margin-bottom:24px}
-.hero-eyebrow .dash{width:32px;height:1px;background:var(--accent-light)}
-.hero h1{font-family:var(--font-heading);font-weight:800;font-size:clamp(36px,6vw,68px);line-height:1.05;letter-spacing:-2px;margin-bottom:28px}
-.hero h1 .accent{color:var(--accent-light)}
-.hero h1 .stroke{color:transparent;-webkit-text-stroke:1.5px var(--text)}
-.hero-desc{font-size:clamp(15px,2vw,18px);color:var(--text-muted);max-width:680px;margin-bottom:36px;line-height:1.7}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:10px;font-size:15px;font-weight:600;transition:all .3s var(--ease)}
-.btn-fill{background:var(--accent);color:var(--ink)}
-.btn-fill:hover{background:var(--accent-light);transform:translateY(-2px)}
-.btn-outline{border:1px solid var(--border-hover);color:var(--text)}
-.btn-outline:hover{background:var(--bg-card);border-color:var(--accent-light)}
-.btn .arrow{transition:transform .3s}
+.hero{position:relative;padding:calc(var(--nav-h) + 64px) 0 72px;border-bottom:1px solid var(--border)}
+.hero-content{position:relative;max-width:880px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:26px}
+.hero h1{font-weight:800;font-size:clamp(34px,5.6vw,64px);line-height:1;letter-spacing:-2.5px;margin-bottom:26px}
+.hero h1 .accent{color:var(--accent)}
+.hero-desc{font-size:clamp(15px,1.7vw,17px);color:var(--text-muted);max-width:640px;margin-bottom:34px;line-height:1.7}
+.hero-btns{display:flex;gap:0;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:16px 28px;font-size:15px;font-weight:600;transition:all .25s var(--ease)}
+.btn-fill{background:var(--ink);color:var(--white)}
+.btn-fill:hover{background:var(--accent)}
+.btn-outline{border:1px solid var(--border-strong);border-left:none}
+.btn-outline:hover{background:var(--bg-alt)}
+.btn .arrow{transition:transform .25s}
 .btn:hover .arrow{transform:translateX(4px)}
 
-/* --- MARQUEE (CSS pur) --- */
-.marquee{overflow:hidden;padding:30px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-alt)}
-.marquee-track{display:flex;white-space:nowrap;animation:scroll-left 9s linear infinite;will-change:transform}
-.marquee-track span{font-family:var(--font-heading);font-weight:800;font-size:clamp(28px,4vw,48px);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.14);padding:0 30px;text-transform:uppercase}
+.ticker{overflow:hidden;padding:14px 0;border-bottom:1px solid var(--border)}
+.ticker-track{display:flex;white-space:nowrap;animation:scroll-left 26s linear infinite;will-change:transform}
+.ticker-track span{font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);padding:0 20px;border-right:1px solid var(--border)}
 @keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* --- SECTIONS --- */
-.section{padding:clamp(60px,10vw,110px) 0}
-.section-alt{background:var(--bg-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.section-head{max-width:760px;margin-bottom:60px}
-.section-num{display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--accent-light);margin-bottom:20px}
-.section-num .ln{width:32px;height:1px;background:var(--accent-light)}
-.section-title{font-family:var(--font-heading);font-weight:800;font-size:clamp(28px,4.5vw,48px);line-height:1.1;letter-spacing:-1.5px}
-.section-title .thin{font-weight:300;color:var(--text-muted)}
-.section-sub{font-size:clamp(15px,2vw,17px);color:var(--text-muted);margin-top:20px;line-height:1.7}
+.section{padding:clamp(64px,10vw,110px) 0;border-bottom:1px solid var(--border)}
+.section-alt{background:var(--bg-alt)}
+.section-head{max-width:820px;margin-bottom:56px}
+.section-num{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.section-title{font-weight:800;font-size:clamp(28px,4.2vw,46px);line-height:1.12;letter-spacing:-1.5px}
+.section-title .thin{font-weight:400;color:var(--text-dim)}
+.section-sub{font-size:clamp(15px,1.6vw,16px);color:var(--text-muted);margin-top:18px;line-height:1.7}
 
-/* --- GRID CARDS --- */
-.grid{display:grid;gap:20px}
+.grid{display:grid;gap:1px;background:var(--border);border:1px solid var(--border)}
 .grid-2{grid-template-columns:repeat(2,1fr)}
 .grid-3{grid-template-columns:repeat(3,1fr)}
 .grid-4{grid-template-columns:repeat(4,1fr)}
 
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:32px 26px;transition:all .4s var(--ease)}
-.card:hover{background:var(--bg-card-hover);border-color:var(--border-hover);transform:translateY(-4px)}
-.card-icon{font-size:34px;margin-bottom:18px}
-.card-num{font-family:var(--font-heading);font-weight:800;font-size:32px;color:var(--accent-light);margin-bottom:14px}
-.card h3{font-family:var(--font-heading);font-weight:700;font-size:19px;margin-bottom:12px}
-.card p{font-size:14.5px;color:var(--text-muted);line-height:1.7}
+.card{background:var(--bg);padding:32px 28px;transition:background .25s}
+.card:hover{background:var(--bg-alt)}
+.card-icon{width:44px;height:44px;border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--ink)}
+.card-num{font-weight:800;font-size:28px;color:var(--accent);margin-bottom:16px;font-variant-numeric:tabular-nums}
+.card h3{font-weight:700;font-size:18px;margin-bottom:10px}
+.card p{font-size:14px;color:var(--text-muted);line-height:1.7}
 
-/* --- DIVIDER (CSS pur) --- */
-.divider{overflow:hidden;padding:0}
-.divider-track{display:flex;white-space:nowrap;animation:scroll-left 12s linear infinite;will-change:transform;padding:24px 0}
+.divider{overflow:hidden;padding:0;border-bottom:1px solid var(--border)}
+.divider-track{display:flex;white-space:nowrap;animation:scroll-left 32s linear infinite;will-change:transform;padding:20px 0}
 .divider-track.rev{animation-direction:reverse}
-.divider-track span{font-family:var(--font-heading);font-weight:800;font-size:clamp(40px,7vw,90px);color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.10);padding:0 40px;text-transform:uppercase;letter-spacing:-2px}
+.divider-track span{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);padding:0 20px}
 
-/* --- CTA --- */
 .cta{text-align:center}
-.cta .section-head{margin:0 auto 40px;display:flex;flex-direction:column;align-items:center}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta .section-head{margin:0 auto 36px}
+.cta-btns{display:flex;gap:0;justify-content:center;flex-wrap:wrap}
 
-/* --- AUTRES VILLES --- */
 .other-zones{text-align:center;font-size:15px;color:var(--text-muted);line-height:1.9}
-.other-zones a{color:var(--accent-light);transition:color .3s}
-.other-zones a:hover{color:var(--white)}
+.other-zones a{color:var(--accent)}
+.other-zones a:hover{color:var(--ink)}
 
-/* --- FOOTER --- */
-.footer{background:var(--bg-alt);border-top:1px solid var(--border);padding:70px 0 36px}
-.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px}
-.footer-logo{font-family:var(--font-heading);font-weight:800;font-size:22px;color:var(--white);margin-bottom:18px}
-.footer-logo .accent{color:var(--accent-light)}
+.footer{background:var(--bg-alt);border-top:1px solid var(--border);padding:64px 0 32px}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-logo{font-weight:800;font-size:20px;color:var(--text);margin-bottom:16px}
+.footer-logo .accent{color:var(--accent)}
 .footer-desc{font-size:14px;color:var(--text-muted);line-height:1.7;max-width:300px}
-.footer-col-title{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:18px}
-.footer-col a{display:block;font-size:14px;color:var(--text-muted);padding:6px 0;transition:color .3s}
-.footer-col a:hover{color:var(--accent-light)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim);flex-wrap:wrap;gap:12px}
-.footer-legal{display:flex;gap:24px}
-.footer-legal a{color:var(--text-dim);transition:color .3s}
+.footer-col-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:18px}
+.footer-col a{display:block;font-size:14px;color:var(--text-muted);padding:6px 0;transition:color .25s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim);flex-wrap:wrap;gap:12px}
+.footer-legal{display:flex;gap:22px}
 .footer-legal a:hover{color:var(--text)}
 
-/* --- REVEAL (IntersectionObserver) --- */
-.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .reveal.in{opacity:1;transform:translateY(0)}
 
-/* --- COOKIE BANNER --- */
-.cookie{position:fixed;bottom:20px;left:20px;right:20px;max-width:480px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border-hover);border-radius:14px;padding:20px 22px;z-index:2000;display:none;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.cookie{position:fixed;bottom:20px;left:20px;right:20px;max-width:440px;margin:0 auto;background:var(--bg);border:1px solid var(--ink);padding:20px 22px;z-index:2000;display:none}
 .cookie.show{display:block}
 .cookie p{font-size:13px;color:var(--text-muted);line-height:1.6}
 .cookie p strong{color:var(--text);font-size:14px}
-.cookie a{color:var(--accent-light)}
-.cookie-btn{margin-top:14px;padding:10px 24px;background:var(--accent);color:var(--ink);border-radius:8px;font-size:14px;font-weight:600;width:100%}
+.cookie a{color:var(--accent)}
+.cookie-btn{margin-top:14px;padding:11px 24px;background:var(--ink);color:var(--white);font-size:14px;font-weight:600;width:100%}
+.cookie-btn:hover{background:var(--accent)}
 
-/* --- RESPONSIVE --- */
 @media(max-width:980px){
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
   .grid-4{grid-template-columns:repeat(2,1fr)}
@@ -187,21 +149,17 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
   .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr;gap:28px}
   .footer-bottom{flex-direction:column;text-align:center}
-  .hero{min-height:auto}
+  .hero{padding-top:calc(var(--nav-h) + 40px)}
+  .hero-btns{flex-direction:column;width:100%}
+  .hero-btns .btn{width:100%;justify-content:center;border-left:1px solid var(--border-strong);border-top:none}
+  .cta-btns{flex-direction:column;width:100%}
+  .cta-btns .btn{width:100%;justify-content:center;border-left:1px solid var(--border-strong);border-top:none}
 }
 
-/* --- a11y + cursor + grain (added) --- */
-.skip-link{position:fixed;top:-60px;left:16px;z-index:10000;background:var(--accent);color:var(--ink);font-weight:700;font-size:14px;padding:12px 20px;border-radius:6px;transition:top .25s var(--ease)}
+.skip-link{position:fixed;top:-60px;left:16px;z-index:10000;background:var(--ink);color:var(--white);font-weight:600;font-size:14px;padding:12px 20px;transition:top .25s var(--ease)}
 .skip-link:focus{top:16px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent-light);outline-offset:3px;border-radius:4px}
-body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.cursor,.cursor-ring{display:none!important}}
-.cursor,.cursor-ring{position:fixed;top:0;left:0;z-index:9998;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%);will-change:transform}
-.cursor{width:6px;height:6px;background:var(--accent-light)}
-.cursor-ring{width:38px;height:38px;border:1px solid var(--border-hover);transition:width .25s var(--ease),height .25s var(--ease),border-color .25s,background .25s}
-.cursor-ring.is-active{width:64px;height:64px;border-color:var(--accent);background:var(--accent-glow)}
-html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
-@media (hover:none),(pointer:coarse){.cursor,.cursor-ring{display:none!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 </style>
 
 <script type="application/ld+json">
@@ -211,40 +169,24 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 <body>
 
 <a href="#main" class="skip-link">Aller au contenu</a>
-<div class="cursor" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"></div>
 
 <nav class="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">Weboost <span class="accent">Studio</span></a>
     <div class="nav-links">
-      <a href="index.html#services" class="nav-link">Services</a>
-      <a href="index.html#approche" class="nav-link">Approche</a>
-      <a href="index.html#formules" class="nav-link">Formules</a>
-      <a href="index.html#portfolio" class="nav-link">Portfolio</a>
-      <a href="index.html#a-propos" class="nav-link">À propos</a>
-      <a href="index.html#zones" class="nav-link">Zones</a>
-      <a href="index.html#contact" class="nav-cta">Contact</a>
+      <a href="index.html#services" class="nav-link">Services</a><a href="index.html#approche" class="nav-link">Approche</a><a href="index.html#formules" class="nav-link">Formules</a><a href="index.html#portfolio" class="nav-link">Portfolio</a><a href="index.html#a-propos" class="nav-link">À propos</a><a href="index.html#zones" class="nav-link">Zones</a><a href="index.html#contact" class="nav-cta">Contact</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Menu" type="button"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="nav-mobile" id="navMobile">
-  <a href="index.html#services">Services</a>
-  <a href="index.html#approche">Approche</a>
-  <a href="index.html#formules">Formules</a>
-  <a href="index.html#portfolio">Portfolio</a>
-  <a href="index.html#a-propos">À propos</a>
-  <a href="index.html#zones">Zones</a>
-  <a href="index.html#contact">Contact</a>
+  <a href="index.html#services">Services</a><a href="index.html#approche">Approche</a><a href="index.html#formules">Formules</a><a href="index.html#portfolio">Portfolio</a><a href="index.html#a-propos">À propos</a><a href="index.html#zones">Zones</a><a href="index.html#contact">Contact</a>
 </div>
 
 <header class="hero" id="main">
-  <div class="hero-glow g1"></div>
-  <div class="hero-glow g2"></div>
   <div class="container hero-content">
-    <div class="hero-eyebrow"><span class="dash"></span> Développeur web — Cogolin</div>
-    <h1>Création site <span class="accent">internet</span><br><span class="stroke">Cogolin</span></h1>
+    <div class="hero-eyebrow">Développeur web — Cogolin</div>
+    <h1>Création site <span class="accent">internet</span><br>Cogolin</h1>
     <p class="hero-desc">Développeur web freelance pour les entreprises de Cogolin. Sites vitrines sur-mesure pour artisans, vignerons, commerces et PME du Golfe de Saint-Tropez. Code optimisé, design responsive et référencement local.</p>
     <div class="hero-btns">
       <a href="index.html#contact" class="btn btn-fill">Devis gratuit <span class="arrow">→</span></a>
@@ -253,8 +195,8 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
   </div>
 </header>
 
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
     <span>Cogolin</span><span>Site Internet</span><span>Développeur Web</span><span>SEO Local</span>
     <span>Cogolin</span><span>Site Internet</span><span>Développeur Web</span><span>SEO Local</span>
   </div>
@@ -263,31 +205,12 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 <section class="section" id="pourquoi">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 01 — Cogolin</div>
-      <h2 class="section-title">Pourquoi votre <span class="thin">entreprise</span><br>à Cogolin a besoin d'un site</h2>
+      <div class="section-num">01 — Cogolin</div>
+      <h2 class="section-title">Pourquoi votre <span class="thin">entreprise</span><br>à Cogolin a besoin d’un site</h2>
       <p class="section-sub">Cogolin, au cœur du Golfe de Saint-Tropez, est connue pour son artisanat d'excellence et ses zones commerciales. Avec ses manufactures, ses vignobles et ses entreprises, c'est un bassin économique important qui mérite une visibilité en ligne à la hauteur.</p>
     </div>
     <div class="grid grid-2">
-      <div class="card reveal">
-        <div class="card-num">01</div>
-        <h3>Cœur du Golfe</h3>
-        <p>Cogolin est le centre névralgique du Golfe. Située entre plages et arrière-pays, tous les habitants et visiteurs y passent. Un site vous rend visible auprès de cette audience.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-num">02</div>
-        <h3>Tradition artisanale</h3>
-        <p>Cogolin est réputée pour ses tapis, ses pipes et ses vins. Un site professionnel valorise ce savoir-faire et attire une clientèle qui cherche la qualité.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-num">03</div>
-        <h3>Zones d'activité</h3>
-        <p>Les zones commerciales accueillent de nombreuses entreprises. Dans un environnement dense, un site optimisé vous différencie et génère des contacts.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-num">04</div>
-        <h3>Proximité des Marines</h3>
-        <p>Les Marines de Cogolin et le port de Grimaud drainent une clientèle haut de gamme. Captez ces visiteurs qui cherchent des services locaux.</p>
-      </div>
+      <div class="card reveal"><div class="card-num">01</div><h3>Cœur du Golfe</h3><p>Cogolin est le centre névralgique du Golfe. Située entre plages et arrière-pays, tous les habitants et visiteurs y passent. Un site vous rend visible auprès de cette audience.</p></div><div class="card reveal"><div class="card-num">02</div><h3>Tradition artisanale</h3><p>Cogolin est réputée pour ses tapis, ses pipes et ses vins. Un site professionnel valorise ce savoir-faire et attire une clientèle qui cherche la qualité.</p></div><div class="card reveal"><div class="card-num">03</div><h3>Zones d’activité</h3><p>Les zones commerciales accueillent de nombreuses entreprises. Dans un environnement dense, un site optimisé vous différencie et génère des contacts.</p></div><div class="card reveal"><div class="card-num">04</div><h3>Proximité des Marines</h3><p>Les Marines de Cogolin et le port de Grimaud drainent une clientèle haut de gamme. Captez ces visiteurs qui cherchent des services locaux.</p></div>
     </div>
   </div>
 </section>
@@ -302,41 +225,12 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 <section class="section section-alt">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 02 — Pour qui</div>
+      <div class="section-num">02 — Pour qui</div>
       <h2 class="section-title">Sites web pour les <span class="thin">entreprises</span><br>de Cogolin</h2>
       <p class="section-sub">Je crée des sites vitrines sur-mesure adaptés à chaque secteur d'activité de Cogolin.</p>
     </div>
     <div class="grid grid-3">
-      <div class="card reveal">
-        <div class="card-icon">🏺</div>
-        <h3>Artisans d'art</h3>
-        <p>Sites vitrines pour les manufactures de tapis, pipes et poteries. Valorisez votre savoir-faire unique.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🍷</div>
-        <h3>Vignobles & caves</h3>
-        <p>Sites pour les domaines viticoles. Présentation des cuvées, visites et dégustations au domaine.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🔧</div>
-        <h3>BTP & rénovation</h3>
-        <p>Sites pour les entreprises du bâtiment — maçons, électriciens, plombiers. Galerie de chantiers.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🛒</div>
-        <h3>Commerces</h3>
-        <p>Sites vitrines pour boulangeries, boucheries, fleuristes et magasins. Horaires et actualités.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🍽️</div>
-        <h3>Restaurants</h3>
-        <p>Sites vitrines avec menu et carte des vins. Attirez la clientèle locale et les visiteurs du golfe.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🏢</div>
-        <h3>PME & services</h3>
-        <p>Sites professionnels pour les PME et entreprises de services des zones d'activité de Cogolin.</p>
-      </div>
+      <div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3c0 2-2 3-2 6a4 4 0 008 0c0-3-2-4-2-6"/><path d="M8.5 15c-.5 2 0 4 1 6h5c1-2 1.5-4 1-6"/><path d="M8 21h8"/></svg></div><h3>Artisans d’art</h3><p>Sites vitrines pour les manufactures de tapis, pipes et poteries. Valorisez votre savoir-faire unique.</p></div><div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l-1 6a3 3 0 01-6 0L8 3z"/><path d="M12 12v6M9 21h6"/></svg></div><h3>Vignobles & caves</h3><p>Sites pour les domaines viticoles. Présentation des cuvées, visites et dégustations au domaine.</p></div><div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3l3 3L8.4 18.6 4 20l1.4-4.4 9.3-9.3z"/><path d="M18 3l3 3"/></svg></div><h3>BTP & rénovation</h3><p>Sites pour les entreprises du bâtiment — maçons, électriciens, plombiers. Galerie de chantiers.</p></div><div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.6 12.4a2 2 0 002 1.6h8.8a2 2 0 002-1.6L21 7H6"/></svg></div><h3>Commerces</h3><p>Sites vitrines pour boulangeries, boucheries, fleuristes et magasins. Horaires et actualités.</p></div><div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3v6a1.5 1.5 0 003 0V3M8 9v12"/><path d="M17 3c-1.7 0-3 2-3 5s1.3 4 3 4M17 3v16"/></svg></div><h3>Restaurants</h3><p>Sites vitrines avec menu et carte des vins. Attirez la clientèle locale et les visiteurs du golfe.</p></div><div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2"/></svg></div><h3>PME & services</h3><p>Sites professionnels pour les PME et entreprises de services des zones d’activité de Cogolin.</p></div>
     </div>
   </div>
 </section>
@@ -351,14 +245,14 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 <section class="section">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> 03 — Services</div>
+      <div class="section-num">03 — Services</div>
       <h2 class="section-title">Ce que je propose <span class="thin">aux entreprises</span><br>de Cogolin</h2>
     </div>
     <div class="grid grid-2">
-      <div class="card reveal"><div class="card-num">🌐</div><h3>Site vitrine sur-mesure</h3><p>Un site internet 100% personnalisé, codé à la main. Pas de template, pas de page builder — du code propre, rapide et optimisé pour Google.</p></div>
-      <div class="card reveal"><div class="card-num">📍</div><h3>SEO local Cogolin</h3><p>Votre site optimisé pour apparaître en premier sur les recherches de votre métier + Cogolin. Configuration de votre fiche Google Business.</p></div>
-      <div class="card reveal"><div class="card-num">📱</div><h3>Design responsive</h3><p>Votre site s'adapte parfaitement à tous les écrans — mobile, tablette, ordinateur. La majorité des recherches locales se font sur smartphone.</p></div>
-      <div class="card reveal"><div class="card-num">⚡</div><h3>Performance & rapidité</h3><p>Un site qui charge en moins de 2 secondes. Chaque seconde de chargement en trop fait fuir vos visiteurs et pénalise votre référencement.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.8 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.8-3.8-9s1.3-6.4 3.8-9z"/></svg></div><h3>Site vitrine sur-mesure</h3><p>Un site internet 100% personnalisé, codé à la main. Pas de template, pas de page builder — du code propre, rapide et optimisé pour Google.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.4"/></svg></div><h3>SEO local Cogolin</h3><p>Votre site optimisé pour apparaître en premier sur les recherches de votre métier + Cogolin. Configuration de votre fiche Google Business.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>Design responsive</h3><p>Votre site s'adapte parfaitement à tous les écrans — mobile, tablette, ordinateur. La majorité des recherches locales se font sur smartphone.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div><h3>Performance & rapidité</h3><p>Un site qui charge en moins de 2 secondes. Chaque seconde de chargement en trop fait fuir vos visiteurs et pénalise votre référencement.</p></div>
     </div>
   </div>
 </section>
@@ -366,18 +260,18 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 <section class="section section-alt cta">
   <div class="container">
     <div class="section-head">
-      <div class="section-num"><span class="ln"></span> Contact</div>
-      <h2 class="section-title">Votre site à Cogolin<br><span class="thin">devis gratuit sous 24h</span></h2>
+      <div class="section-num">Contact</div>
+      <h2 class="section-title">Votre site Cogolin<br><span class="thin">devis gratuit sous 24h</span></h2>
       <p class="section-sub" style="text-align:center">Contactez votre développeur web à Cogolin pour discuter de votre projet. Premier échange gratuit et sans engagement.</p>
     </div>
     <div class="cta-btns">
       <a href="index.html#contact" class="btn btn-fill">Demander un devis <span class="arrow">→</span></a>
-      <a href="tel:+33669371667" class="btn btn-outline">📞 06 69 37 16 67</a>
+      <a href="tel:+33669371667" class="btn btn-outline">06 69 37 16 67</a>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="border-bottom:none">
   <div class="container">
     <p class="other-zones">Également disponible à <a href="creation-site-internet-saint-tropez.html">Saint-Tropez</a>, <a href="creation-site-internet-cavalaire.html">Cavalaire-sur-Mer</a>, <a href="creation-site-internet-sainte-maxime.html">Sainte-Maxime</a> et <a href="creation-site-internet-la-croix-valmer.html">La Croix-Valmer</a> et dans tout le <a href="developpeur-web-var.html">Var (83)</a>.</p>
   </div>
@@ -396,7 +290,7 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Zones</div>
-        <a href="creation-site-internet-saint-tropez.html">Saint-Tropez</a><a href="creation-site-internet-cavalaire.html">Cavalaire</a><a href="creation-site-internet-sainte-maxime.html">Sainte-Maxime</a><a href="creation-site-internet-cogolin.html">Cogolin</a><a href="creation-site-internet-la-croix-valmer.html">La Croix-Valmer</a><a href="developpeur-web-var.html">Var</a>
+        <a href="creation-site-internet-saint-tropez.html">Saint-Tropez</a><a href="creation-site-internet-cavalaire.html">Cavalaire-sur-Mer</a><a href="creation-site-internet-sainte-maxime.html">Sainte-Maxime</a><a href="creation-site-internet-cogolin.html">Cogolin</a><a href="creation-site-internet-la-croix-valmer.html">La Croix-Valmer</a><a href="developpeur-web-var.html">Var (83)</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Contact</div>
@@ -411,31 +305,16 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 </footer>
 
 <div class="cookie" id="cookie">
-  <p><strong>🍪 Cookies</strong></p>
+  <p><strong>Cookies</strong></p>
   <p>Ce site utilise uniquement des cookies techniques essentiels. Aucun tracking. <a href="politique-confidentialite.html">En savoir plus</a></p>
   <button class="cookie-btn" id="cookieBtn">Accepter</button>
 </div>
 
 <script>
 (function(){
-  var prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isTouch=window.matchMedia('(hover: none), (pointer: coarse)').matches;
-  if(!isTouch && !prefersReducedMotion){
-    var cdot=document.querySelector('.cursor'), cring=document.querySelector('.cursor-ring');
-    if(cdot && cring){
-      document.documentElement.classList.add('has-cursor');
-      var mx=-100,my=-100,rx=-100,ry=-100;
-      window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cdot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)'});
-      (function loop(){rx+=(mx-rx)*0.18;ry+=(my-ry)*0.18;cring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';requestAnimationFrame(loop)})();
-      document.querySelectorAll('a,button').forEach(function(el){
-        el.addEventListener('mouseenter',function(){cring.classList.add('is-active')});
-        el.addEventListener('mouseleave',function(){cring.classList.remove('is-active')});
-      });
-    }
-  }
   var t=document.getElementById('navToggle'),m=document.getElementById('navMobile');
-  if(t&&m){t.addEventListener('click',function(){m.classList.toggle('open');t.classList.toggle('active')});
-    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');t.classList.remove('active')})});}
+  if(t&&m){t.addEventListener('click',function(){m.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=m.classList.contains('open')?'hidden':''});
+    m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');t.classList.remove('active');document.body.style.overflow=''})});}
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});

@@ -8,37 +8,13 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" sizes="192x192" href="favicon-192.png">
-  <link rel="preload" href="assets/fonts/Poppins-Bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/Poppins-Black.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Inter-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/css/style.css" as="style"><link rel="stylesheet" href="assets/css/style.css">
-  <style>
-    .legal-content{max-width:800px;margin:0 auto;padding-top:calc(var(--nav-h) + 60px);padding-bottom:100px}
-    .legal-content h1{font-family:var(--font-heading);font-size:clamp(36px,5vw,56px);font-weight:900;text-transform:uppercase;letter-spacing:-2px;margin-bottom:8px}
-    .legal-date{font-size:14px;color:var(--text-dim);margin-bottom:48px}
-    .legal-content h2{font-family:var(--font-heading);font-size:22px;font-weight:700;margin-top:48px;margin-bottom:16px;color:var(--accent-light)}
-    .legal-content h3{font-family:var(--font-heading);font-size:17px;font-weight:600;margin-top:28px;margin-bottom:10px}
-    .legal-content p,.legal-content li{font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:12px}
-    .legal-content ul{padding-left:20px;margin-bottom:16px}
-    .legal-content li{list-style:disc;margin-bottom:6px}
-    .legal-content a{color:var(--accent-light);transition:color .3s}
-    .legal-content a:hover{color:var(--white)}
-    .legal-content strong{color:var(--text)}
-    .legal-back{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--accent-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:32px;transition:gap .3s}
-    .legal-back:hover{gap:14px}
-  </style>
-<style>
-.hero-title .line-inner{transform:none!important}
-.hero-desc,.hero-btns,.hero-eyebrow{opacity:1!important;transform:none!important}
-.hero-bg-glow{opacity:0.15!important}
-.reveal-up{opacity:1!important;transform:none!important}
-</style>
 </head>
 <body>
 
 <a href="#main" class="skip-link">Aller au contenu</a>
-<div class="cursor" aria-hidden="true"></div>
-<div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
 
 <!-- Nav -->
 <nav class="nav scrolled">
@@ -220,13 +196,12 @@
 
 <script src="assets/js/gsap.min.js" defer></script>
 <script src="assets/js/ScrollTrigger.min.js" defer></script>
-<script src="assets/js/ScrollToPlugin.min.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 <!-- Cookie Banner -->
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-inner">
     <div class="cookie-text">
-      <p><strong>🍪 Cookies</strong></p>
+      <p><strong>Cookies</strong></p>
       <p>Ce site utilise uniquement des cookies techniques essentiels au bon fonctionnement (navigation, mémorisation de vos préférences). Aucun cookie de tracking, publicité ou analyse n'est utilisé. Vos données ne sont pas transmises à des tiers. <a href="politique-confidentialite.html">En savoir plus</a></p>
     </div>
     <button class="cookie-btn" onclick="acceptCookies()">Accepter</button>
