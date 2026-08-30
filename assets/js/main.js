@@ -274,6 +274,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ========== PORTFOLIO — cursor-following preview (hover-capable only) ==========
+  const portfolioPreview = document.getElementById('portfolioPreview');
+  if (portfolioPreview && !isTouch && !prefersReducedMotion) {
+    const previewImg = document.getElementById('portfolioPreviewImg');
+    const previewTag = document.getElementById('portfolioPreviewTag');
+    const cursorBlob = document.querySelector('.cursor-blob');
+    let mx = -200, my = -200, px = -200, py = -200, scale = 0.82, targetScale = 0.82, lastMx = -200, rot = 0;
+    window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    const tick = () => {
+      px += (mx - px) * 0.16;
+      py += (my - py) * 0.16;
+      scale += (targetScale - scale) * 0.16;
+      const vx = mx - lastMx; lastMx = mx;
+      rot += ((Math.max(-14, Math.min(14, vx * 1.4))) - rot) * 0.16;
+      portfolioPreview.style.transform = `translate(${px}px, ${py}px) translate(-50%,-50%) scale(${scale}) rotate(${rot}deg)`;
+      requestAnimationFrame(tick);
+    };
+    tick();
+    document.querySelectorAll('.portfolio-row').forEach(row => {
+      const src = row.dataset.previewImg;
+      const tag = row.dataset.previewTag || '';
+      row.addEventListener('mouseenter', () => {
+        if (src) previewImg.src = src;
+        if (previewTag) previewTag.textContent = tag;
+        portfolioPreview.classList.add('is-active');
+        targetScale = 1;
+        if (cursorBlob) cursorBlob.style.opacity = '0';
+      });
+      row.addEventListener('mouseleave', () => {
+        portfolioPreview.classList.remove('is-active');
+        targetScale = 0.82;
+        if (cursorBlob) cursorBlob.style.opacity = '';
+      });
+    });
+  }
+
   // ========== FAQ ACCORDION ==========
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
