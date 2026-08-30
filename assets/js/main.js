@@ -127,15 +127,34 @@ document.addEventListener('DOMContentLoaded', () => {
     heroReveal();
   }
 
-  // ========== HERO — cinematic pinned photo reveal (desktop only) ==========
+  // ========== HERO — photo comes alive on scroll ==========
   const heroPhotoImg = document.querySelector('.hero-photo-img');
-  if (heroPhotoImg && hasGsap && !prefersReducedMotion && window.innerWidth > 900) {
-    const heroTl = gsap.timeline({
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=100%', scrub: 0.6, pin: true },
-    });
-    heroTl.to(heroPhotoImg, { scale: 1, filter: 'grayscale(0.05) brightness(0.8) saturate(1.05) contrast(1.02)', ease: 'none' }, 0);
-    heroTl.to('.hero-content', { y: -50, ease: 'none' }, 0);
-    heroTl.to('.hero-ghost-num', { opacity: 0.15, y: -60, ease: 'none' }, 0);
+  if (heroPhotoImg && hasGsap && !prefersReducedMotion) {
+    if (window.innerWidth > 900) {
+      // Desktop: hero stays pinned full-screen for one extra viewport of scroll
+      // while the photo zooms out and comes into color — a short cinematic beat.
+      const heroTl = gsap.timeline({
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=100%', scrub: 0.6, pin: true },
+      });
+      heroTl.to(heroPhotoImg, { scale: 1, filter: 'grayscale(0.05) brightness(0.8) saturate(1.05) contrast(1.02)', ease: 'none' }, 0);
+      heroTl.to('.hero-content', { y: -50, ease: 'none' }, 0);
+      heroTl.to('.hero-ghost-num', { opacity: 0.15, y: -60, ease: 'none' }, 0);
+    } else {
+      // Mobile/tablet: no pinning (address-bar resize makes pinned sections
+      // jump on phones) — a real depth parallax instead, tied to the hero's
+      // normal scroll-past, image kept oversized so it never shows an edge.
+      gsap.to(heroPhotoImg, {
+        yPercent: 7,
+        filter: 'grayscale(0.12) brightness(0.85) saturate(1.05) contrast(1.02)',
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.4 },
+      });
+      gsap.to('.hero-ghost-num', {
+        yPercent: -30,
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.4 },
+      });
+    }
   }
 
   // ========== KINETIC SECTION TITLES (scroll-triggered) ==========
