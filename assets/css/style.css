@@ -129,15 +129,15 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 .btn .arrow{transition:transform .25s}
 .btn:hover .arrow{transform:translateX(4px)}
 
-/* ===================== TICKER ===================== */
-.ticker{padding:24px 0;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.ticker-row{display:flex;white-space:nowrap;will-change:transform}
-.ticker-item{font-family:var(--font-display);font-size:clamp(30px,4.4vw,54px);font-weight:800;letter-spacing:-1.5px;text-transform:uppercase;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.18);display:flex;align-items:center;gap:28px;flex-shrink:0;padding-right:28px}
-.ticker-item .dot{width:9px;height:9px;border-radius:50%;background:var(--gradient);flex-shrink:0;-webkit-text-stroke:0}
-.ticker-item.pop{color:var(--accent-2);-webkit-text-stroke:0;opacity:.9}
-
-.section-divider{overflow:hidden;padding:16px 0;border-bottom:1px solid var(--border)}
-.divider-text{font-family:var(--font-display);font-size:clamp(13px,1.6vw,15px);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);white-space:nowrap;display:inline-block}
+/* ===================== WORD BAND — mot qui s'enchaîne ===================== */
+.word-band{padding:34px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.word-band + .word-band{border-top:none}
+.word-band-inner{display:flex;align-items:baseline;justify-content:center;flex-wrap:wrap;gap:.35em;font-family:var(--font-display);font-weight:700;font-size:clamp(17px,2.4vw,28px);letter-spacing:-.5px;text-align:center}
+.word-band-label{color:var(--text-dim)}
+.word-rotator{position:relative;display:inline-block;height:1.25em;overflow:hidden;vertical-align:bottom;transition:width .45s var(--ease)}
+.word-rotator-item{position:absolute;left:0;top:0;white-space:nowrap;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(60%);transition:transform .5s var(--ease),opacity .4s ease}
+.word-rotator-item.is-active{opacity:1;transform:translateY(0)}
+.word-rotator-item.is-prev{opacity:0;transform:translateY(-60%)}
 
 /* ===================== SECTIONS ===================== */
 .section{padding:clamp(88px,13vh,160px) 0;position:relative}
@@ -366,7 +366,7 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
   .footer-bottom{flex-direction:column;gap:12px;text-align:center;align-items:center}
   .footer-legal{justify-content:center}
   .footer-cta-meta{gap:16px;flex-direction:column}
-  .ticker-item{font-size:clamp(24px,8vw,36px)}
+  .word-band-inner{font-size:clamp(16px,4.6vw,22px);gap:.3em}
 }
 
 /* ===================== COOKIE BANNER ===================== */

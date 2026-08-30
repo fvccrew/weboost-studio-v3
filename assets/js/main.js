@@ -150,33 +150,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ========== TICKERS ==========
-  document.querySelectorAll('.ticker-row').forEach(row => {
-    const isReverse = row.classList.contains('reverse');
-    if (!row.dataset.cloned) { row.innerHTML += row.innerHTML; row.dataset.cloned = 'true'; }
-    if (prefersReducedMotion) return;
-    const totalW = row.scrollWidth / 2;
-    if (!hasGsap) { row.style.animation = `tickerScroll ${isReverse ? 34 : 40}s linear infinite ${isReverse ? 'reverse' : 'normal'}`; return; }
-    if (isReverse) gsap.set(row, { x: -totalW });
-    gsap.to(row, { x: isReverse ? 0 : -totalW, duration: isReverse ? 34 : 40, ease: 'none', repeat: -1 });
-  });
-
-  document.querySelectorAll('.section-divider').forEach(divider => {
-    const text = divider.querySelector('.divider-text');
-    if (!text) return;
-    const dir = text.dataset.dir === 'right' ? -1 : 1;
-    const clone = text.cloneNode(true);
-    clone.style.marginLeft = '48px';
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'display:flex;align-items:center;white-space:nowrap;will-change:transform;';
-    divider.innerHTML = '';
-    wrapper.appendChild(text);
-    wrapper.appendChild(clone);
-    divider.appendChild(wrapper);
-    if (prefersReducedMotion || !hasGsap) return;
-    const totalW = wrapper.scrollWidth / 2;
-    if (dir < 0) gsap.set(wrapper, { x: -totalW });
-    gsap.to(wrapper, { x: dir < 0 ? 0 : -totalW, duration: 38, ease: 'none', repeat: -1 });
+  // ========== WORD ROTATORS — mot qui s'enchaîne ==========
+  document.querySelectorAll('.word-rotator').forEach(el => {
+    const items = Array.from(el.querySelectorAll('.word-rotator-item'));
+    if (!items.length) return;
+    let idx = 0;
+    items[0].classList.add('is-active');
+    const sizeToActive = () => { el.style.width = items[idx].getBoundingClientRect().width + 'px'; };
+    sizeToActive();
+    // Widths measured before the display font swaps in are wrong (FOUT) — re-measure once it's ready
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeToActive);
+    if (items.length < 2 || prefersReducedMotion) return;
+    const advance = () => {
+      const next = (idx + 1) % items.length;
+      items[idx].classList.remove('is-active');
+      items[idx].classList.add('is-prev');
+      items[next].classList.add('is-active');
+      const leaving = items[idx];
+      idx = next;
+      sizeToActive();
+      setTimeout(() => leaving.classList.remove('is-prev'), 550);
+    };
+    setTimeout(() => { advance(); setInterval(advance, 2400); }, 2400 + Math.random() * 900);
   });
 
   // ========== PROCESS — PINNED SCROLL STORY (desktop only) ==========
@@ -325,10 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('visibilitychange', () => { if (!document.hidden) ScrollTrigger.refresh(); });
   }
 });
-
-const styleTag = document.createElement('style');
-styleTag.textContent = '@keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}';
-document.head.appendChild(styleTag);
 
 window.addEventListener('pageshow', function (e) {
   if (e.persisted) {

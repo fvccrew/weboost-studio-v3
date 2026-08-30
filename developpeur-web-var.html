@@ -88,10 +88,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .btn .arrow{transition:transform .25s}
 .btn:hover .arrow{transform:translateX(4px)}
 
-.ticker{overflow:hidden;padding:18px 0;border-bottom:1px solid var(--border)}
-.ticker-track{display:flex;white-space:nowrap;animation:scroll-left 26s linear infinite;will-change:transform}
-.ticker-track span{font-family:var(--font-display);font-size:clamp(22px,3.2vw,34px);font-weight:800;letter-spacing:-1px;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.16);padding:0 24px}
-@keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.word-band{padding:30px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.word-band + .word-band{border-top:none}
+.word-band-inner{display:flex;align-items:baseline;justify-content:center;flex-wrap:wrap;gap:.35em;font-family:var(--font-display);font-weight:700;font-size:clamp(16px,2.2vw,24px);letter-spacing:-.5px;text-align:center}
+.word-band-label{color:var(--text-dim)}
+.word-rotator{position:relative;display:inline-block;height:1.25em;overflow:hidden;vertical-align:bottom;transition:width .45s var(--ease)}
+.word-rotator-item{position:absolute;left:0;top:0;white-space:nowrap;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:0;transform:translateY(60%);transition:transform .5s var(--ease),opacity .4s ease}
+.word-rotator-item.is-active{opacity:1;transform:translateY(0)}
+.word-rotator-item.is-prev{opacity:0;transform:translateY(-60%)}
 
 .section{padding:clamp(64px,10vw,110px) 0;border-bottom:1px solid var(--border);position:relative}
 .section-alt{background:var(--bg-alt)}
@@ -113,10 +117,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit;color:inhe
 .card h3{font-family:var(--font-display);font-weight:700;font-size:18px;margin-bottom:10px}
 .card p{font-size:14px;color:var(--text-muted);line-height:1.7}
 
-.divider{overflow:hidden;padding:0;border-bottom:1px solid var(--border)}
-.divider-track{display:flex;white-space:nowrap;animation:scroll-left 32s linear infinite;will-change:transform;padding:18px 0}
-.divider-track.rev{animation-direction:reverse}
-.divider-track span{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-dim);padding:0 20px}
 
 .cta{text-align:center}
 .cta .section-head{margin:0 auto 36px}
@@ -206,10 +206,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-2);outline-o
   </div>
 </header>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span>Var</span><span>Site Internet</span><span>Développeur Web</span><span>SEO Local</span>
-    <span>Var</span><span>Site Internet</span><span>Développeur Web</span><span>SEO Local</span>
+<div class="word-band" aria-hidden="true">
+  <div class="container word-band-inner">
+    <span class="word-band-label">Expert en</span>
+    <span class="word-rotator">
+      <span class="word-rotator-item">création de site internet</span>
+      <span class="word-rotator-item">référencement SEO local</span>
+      <span class="word-rotator-item">webdesign sur-mesure</span>
+    </span>
+    <span class="word-band-label">à Var</span>
   </div>
 </div>
 
@@ -226,10 +231,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-2);outline-o
   </div>
 </section>
 
-<div class="divider" aria-hidden="true">
-  <div class="divider-track">
-    <span>Var</span><span>·</span><span>Site Internet</span><span>·</span><span>SEO Local</span><span>·</span>
-    <span>Var</span><span>·</span><span>Site Internet</span><span>·</span><span>SEO Local</span><span>·</span>
+<div class="word-band" aria-hidden="true">
+  <div class="container word-band-inner">
+    <span class="word-band-label">Var</span>
+    <span class="word-rotator">
+      <span class="word-rotator-item">Site Internet</span>
+      <span class="word-rotator-item">SEO Local</span>
+      <span class="word-rotator-item">Design Responsive</span>
+    </span>
   </div>
 </div>
 
@@ -246,10 +255,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-2);outline-o
   </div>
 </section>
 
-<div class="divider" aria-hidden="true">
-  <div class="divider-track rev">
-    <span>Design Premium</span><span>·</span><span>Responsive</span><span>·</span><span>Performance</span><span>·</span>
-    <span>Design Premium</span><span>·</span><span>Responsive</span><span>·</span><span>Performance</span><span>·</span>
+<div class="word-band" aria-hidden="true">
+  <div class="container word-band-inner">
+    <span class="word-band-label">Toujours</span>
+    <span class="word-rotator">
+      <span class="word-rotator-item">Design Premium</span>
+      <span class="word-rotator-item">Responsive</span>
+      <span class="word-rotator-item">Performant</span>
+    </span>
   </div>
 </div>
 
@@ -323,6 +336,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-2);outline-o
 
 <script>
 (function(){
+  var prefersReducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var t=document.getElementById('navToggle'),m=document.getElementById('navMobile');
   if(t&&m){t.addEventListener('click',function(){m.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=m.classList.contains('open')?'hidden':''});
     m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');t.classList.remove('active');document.body.style.overflow=''})});}
@@ -330,6 +344,26 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent-2);outline-o
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
   }else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')})}
+  document.querySelectorAll('.word-rotator').forEach(function(el){
+    var items=Array.prototype.slice.call(el.querySelectorAll('.word-rotator-item'));
+    if(!items.length)return;
+    var idx=0;
+    items[0].classList.add('is-active');
+    function sizeToActive(){el.style.width=items[idx].getBoundingClientRect().width+'px'}
+    sizeToActive();
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(sizeToActive);
+    if(items.length<2||prefersReducedMotion)return;
+    function advance(){
+      var next=(idx+1)%items.length;
+      items[idx].classList.remove('is-active');items[idx].classList.add('is-prev');
+      items[next].classList.add('is-active');
+      var leaving=items[idx];
+      idx=next;
+      sizeToActive();
+      setTimeout(function(){leaving.classList.remove('is-prev')},550);
+    }
+    setTimeout(function(){advance();setInterval(advance,2400)},2400+Math.random()*900);
+  });
   try{if(!localStorage.getItem('cookieAccepted')){setTimeout(function(){document.getElementById('cookie').classList.add('show')},1500)}
   document.getElementById('cookieBtn').addEventListener('click',function(){document.getElementById('cookie').classList.remove('show');localStorage.setItem('cookieAccepted','1')});}catch(e){}
 })();
