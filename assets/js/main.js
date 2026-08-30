@@ -118,13 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     tl.to('.hero-desc', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.55);
     tl.to('.hero-btns', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.65);
     tl.to('.hero-panel', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.5);
-
-    gsap.to('.hero-glow.g1', { y: 40, x: -20, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-    gsap.to('.hero-glow.g2', { y: -30, x: 20, duration: 7, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 0.5 });
-    gsap.to('.hero-ghost-num', {
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.2 },
-      y: -120, opacity: 0.4,
-    });
   }
 
   if (hasHash) {
@@ -132,6 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.hero-eyebrow, .hero-desc, .hero-btns, .hero-panel').forEach(el => { el.style.opacity = '1'; });
   } else {
     heroReveal();
+  }
+
+  // ========== HERO — cinematic pinned photo reveal (desktop only) ==========
+  const heroPhotoImg = document.querySelector('.hero-photo-img');
+  if (heroPhotoImg && hasGsap && !prefersReducedMotion && window.innerWidth > 900) {
+    const heroTl = gsap.timeline({
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=100%', scrub: 0.6, pin: true },
+    });
+    heroTl.to(heroPhotoImg, { scale: 1, filter: 'grayscale(0.05) brightness(0.8) saturate(1.05) contrast(1.02)', ease: 'none' }, 0);
+    heroTl.to('.hero-content', { y: -50, ease: 'none' }, 0);
+    heroTl.to('.hero-ghost-num', { opacity: 0.15, y: -60, ease: 'none' }, 0);
   }
 
   // ========== KINETIC SECTION TITLES (scroll-triggered) ==========
