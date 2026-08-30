@@ -63,6 +63,7 @@ body::before{
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .cursor-blob{display:none!important}
+  .hero-curtain,.hero-grain,.hero-sheen,.hero-scrollcue,.hero-stage2{display:none!important}
 }
 
 .icon{display:block;flex-shrink:0}
@@ -100,13 +101,25 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
 
 /* ===================== HERO ===================== */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav-h) + 32px) 0 80px;overflow:hidden}
-.hero-photo{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--bg)}
+.hero-photo{position:absolute;inset:-24px;z-index:0;overflow:hidden;background:var(--bg)}
 .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:center 42%;transform:scale(1.12);filter:grayscale(.5) brightness(.55) saturate(.8) contrast(1.06);will-change:transform,filter}
 .hero-photo-overlay{position:absolute;inset:0;background:
   linear-gradient(100deg,rgba(10,9,8,.82) 0%,rgba(10,9,8,.62) 38%,rgba(10,9,8,.25) 66%,rgba(10,9,8,.15) 100%),
   linear-gradient(180deg,rgba(10,9,8,.35) 0%,rgba(10,9,8,.2) 30%,rgba(10,9,8,.4) 62%,rgba(10,9,8,.97) 100%)}
 .hero-photo-overlay::after{content:'';position:absolute;inset:0;background:var(--gradient);opacity:.13;mix-blend-mode:color}
+.hero-sheen{position:absolute;inset:-20% -40%;background:linear-gradient(75deg,transparent 42%,rgba(255,255,255,.15) 49%,rgba(255,255,255,.32) 50%,rgba(255,255,255,.15) 51%,transparent 58%);pointer-events:none;mix-blend-mode:overlay;will-change:transform}
+.hero-grain{position:absolute;inset:0;width:100%;height:100%;z-index:5;opacity:.045;mix-blend-mode:overlay;pointer-events:none}
+.hero-curtain{position:absolute;top:0;bottom:0;width:50%;background:var(--bg);z-index:2;pointer-events:none}
+.hero-curtain-l{left:0}
+.hero-curtain-r{right:0}
 .hero-ghost-num{position:absolute;top:8%;right:-2%;font-family:var(--font-display);font-weight:900;font-size:min(46vw,620px);line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.14);pointer-events:none;user-select:none;z-index:1;mix-blend-mode:overlay}
+.hero-stage2{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:none;opacity:0}
+.hero-stage2-line{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,5.2vw,64px);letter-spacing:-1.5px;line-height:1.15;max-width:15ch;padding:0 24px}
+.hero-scrollcue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;pointer-events:none}
+.hero-scrollcue-text{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-dim)}
+.hero-scrollcue-line{width:1px;height:32px;background:rgba(255,255,255,.16);position:relative;overflow:hidden}
+.hero-scrollcue-line::after{content:'';position:absolute;left:0;top:-100%;width:100%;height:60%;background:linear-gradient(var(--accent-2),var(--accent));animation:scrollcue-drip 1.9s ease-in-out infinite}
+@keyframes scrollcue-drip{0%{top:-60%}70%{top:100%}100%{top:100%}}
 .hero > .container{position:relative;z-index:2}
 .hero-content{position:relative;z-index:2;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}
 .hero-eyebrow{grid-column:1/span 8;display:flex;align-items:center;gap:12px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent-2);margin-bottom:28px}
@@ -362,6 +375,7 @@ html.has-cursor,html.has-cursor a,html.has-cursor button{cursor:none}
   .portfolio-row-desc{max-width:none}
   .hero-title{letter-spacing:-1.5px}
   .hero-photo-img{object-position:30% 45%;transform:scale(1.24)}
+  .hero-scrollcue,.hero-stage2{display:none}
   .section-title{font-size:clamp(28px,7.5vw,40px)!important;letter-spacing:-1px!important}
   .section-ghost{display:none}
   .hero-btns{flex-direction:column;width:100%}

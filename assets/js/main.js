@@ -104,41 +104,119 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ========== HERO REVEAL (kinetic word-by-word) ==========
+  // ========== HERO REVEAL — cinematic curtain opening + kinetic title ==========
+  function initScrollCueFade() {
+    const cue = document.querySelector('.hero-scrollcue');
+    if (!cue) return;
+    window.addEventListener('scroll', () => {
+      cue.style.opacity = window.scrollY > 60 ? '0' : '';
+    }, { passive: true });
+  }
+
   function heroReveal() {
     if (!hasGsap || prefersReducedMotion) {
       document.querySelectorAll('.hero-title .word-inner').forEach(el => { el.style.transform = 'none'; el.style.filter = 'none'; });
       document.querySelectorAll('.hero-eyebrow, .hero-desc, .hero-btns, .hero-panel').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+      document.querySelectorAll('.hero-curtain, .hero-sheen').forEach(el => { el.style.display = 'none'; });
       return;
     }
     gsap.set('.hero-title .word-inner', { y: '110%', rotate: 6, filter: 'blur(10px)' });
+    gsap.set('.hero-ghost-num', { opacity: 0, scale: 1.12 });
+    gsap.set('.hero-sheen', { xPercent: -170 });
     const tl = gsap.timeline({ delay: 0.1 });
-    tl.to('.hero-eyebrow', { opacity: 1, duration: 0.5, ease: 'power3.out' }, 0);
-    tl.to('.hero-title .word-inner', { y: '0%', rotate: 0, filter: 'blur(0px)', duration: 1, stagger: 0.05, ease: 'power4.out' }, 0.15);
-    tl.to('.hero-desc', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.55);
-    tl.to('.hero-btns', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.65);
-    tl.to('.hero-panel', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.5);
+    // Act 0 — the curtains open on the photo, a light sweep glides across it.
+    tl.to('.hero-curtain-l', { xPercent: -100, duration: 1.05, ease: 'power4.inOut' }, 0);
+    tl.to('.hero-curtain-r', { xPercent: 100, duration: 1.05, ease: 'power4.inOut' }, 0);
+    tl.to('.hero-sheen', { xPercent: 170, duration: 1.3, ease: 'power2.inOut' }, 0.05);
+    tl.to('.hero-ghost-num', { opacity: 1, scale: 1, duration: 1, ease: 'power3.out' }, 0.35);
+    // Act 1 — eyebrow, kinetic title, copy and panel land in sequence.
+    tl.to('.hero-eyebrow', { opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.5);
+    tl.to('.hero-title .word-inner', { y: '0%', rotate: 0, filter: 'blur(0px)', duration: 1, stagger: 0.05, ease: 'power4.out' }, 0.55);
+    tl.to('.hero-desc', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.95);
+    tl.to('.hero-btns', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 1.05);
+    tl.to('.hero-panel', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.9);
+    tl.to('.hero-scrollcue', { opacity: 1, duration: 0.6, ease: 'power2.out' }, 1.3);
+    tl.eventCallback('onComplete', initScrollCueFade);
   }
 
   if (hasHash) {
     document.querySelectorAll('.hero-title .word-inner').forEach(el => { el.style.transform = 'none'; el.style.filter = 'none'; });
     document.querySelectorAll('.hero-eyebrow, .hero-desc, .hero-btns, .hero-panel').forEach(el => { el.style.opacity = '1'; });
+    document.querySelectorAll('.hero-curtain, .hero-sheen').forEach(el => { el.style.display = 'none'; });
+    const ghostNum = document.querySelector('.hero-ghost-num');
+    if (ghostNum) ghostNum.style.opacity = '1';
+    const scrollCue = document.querySelector('.hero-scrollcue');
+    if (scrollCue) scrollCue.style.opacity = '1';
+    initScrollCueFade();
   } else {
     heroReveal();
+  }
+
+  // ========== HERO — mouse-driven depth parallax (desktop hover only) ==========
+  if (hasGsap && !isTouch && !prefersReducedMotion) {
+    const heroEl = document.querySelector('.hero');
+    const heroPhoto = document.querySelector('.hero-photo');
+    const ghostNum = document.querySelector('.hero-ghost-num');
+    if (heroEl && heroPhoto) {
+      const xToPhoto = gsap.quickTo(heroPhoto, 'x', { duration: 1.1, ease: 'power3.out' });
+      const yToPhoto = gsap.quickTo(heroPhoto, 'y', { duration: 1.1, ease: 'power3.out' });
+      const xToGhost = ghostNum ? gsap.quickTo(ghostNum, 'x', { duration: 1.3, ease: 'power3.out' }) : null;
+      heroEl.addEventListener('mousemove', e => {
+        const r = heroEl.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        xToPhoto(px * -14);
+        yToPhoto(py * -10);
+        if (xToGhost) xToGhost(px * 20);
+      });
+      heroEl.addEventListener('mouseleave', () => {
+        xToPhoto(0); yToPhoto(0);
+        if (xToGhost) xToGhost(0);
+      });
+    }
+  }
+
+  // ========== HERO — film grain flicker (canvas noise) ==========
+  const grainCanvas = document.querySelector('.hero-grain');
+  if (grainCanvas && !prefersReducedMotion) {
+    const gctx = grainCanvas.getContext('2d');
+    const GRAIN_SIZE = 160;
+    grainCanvas.width = GRAIN_SIZE;
+    grainCanvas.height = GRAIN_SIZE;
+    const drawGrain = () => {
+      const imgData = gctx.createImageData(GRAIN_SIZE, GRAIN_SIZE);
+      const buf = imgData.data;
+      for (let i = 0; i < buf.length; i += 4) {
+        const v = Math.random() * 255;
+        buf[i] = buf[i + 1] = buf[i + 2] = v;
+        buf[i + 3] = 255;
+      }
+      gctx.putImageData(imgData, 0, 0);
+    };
+    drawGrain();
+    let grainInterval = setInterval(drawGrain, 90);
+    document.addEventListener('visibilitychange', () => {
+      clearInterval(grainInterval);
+      if (!document.hidden) grainInterval = setInterval(drawGrain, 90);
+    });
   }
 
   // ========== HERO — photo comes alive on scroll ==========
   const heroPhotoImg = document.querySelector('.hero-photo-img');
   if (heroPhotoImg && hasGsap && !prefersReducedMotion) {
     if (window.innerWidth > 900) {
-      // Desktop: hero stays pinned full-screen for one extra viewport of scroll
-      // while the photo zooms out and comes into color — a short cinematic beat.
+      // Desktop: hero stays pinned for a genuine two-act scroll story —
+      // the photo zooms into color first, the intro copy exits, then a
+      // second punchline crossfades in centre-stage before unpinning.
       const heroTl = gsap.timeline({
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=100%', scrub: 0.6, pin: true },
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=160%', scrub: 0.6, pin: true },
       });
-      heroTl.to(heroPhotoImg, { scale: 1, filter: 'grayscale(0.05) brightness(0.8) saturate(1.05) contrast(1.02)', ease: 'none' }, 0);
-      heroTl.to('.hero-content', { y: -50, ease: 'none' }, 0);
-      heroTl.to('.hero-ghost-num', { opacity: 0.15, y: -60, ease: 'none' }, 0);
+      heroTl.to(heroPhotoImg, { scale: 1.04, filter: 'grayscale(0.05) brightness(0.8) saturate(1.05) contrast(1.02)', ease: 'none' }, 0);
+      heroTl.to('.hero-content', { y: -60, opacity: 0, ease: 'power1.in' }, 0.26);
+      heroTl.to('.hero-ghost-num', { opacity: 0.12, y: -80, scale: 1.08, ease: 'none' }, 0);
+      heroTl.to('.hero-stage2', { opacity: 1, ease: 'power2.out' }, 0.46);
+      heroTl.fromTo('.hero-stage2-line', { y: 36, filter: 'blur(8px)' }, { y: 0, filter: 'blur(0px)', ease: 'power2.out' }, 0.5);
+      heroTl.to('.hero-stage2', { opacity: 0, ease: 'power1.in' }, 0.86);
     } else {
       // Mobile/tablet: no pinning (address-bar resize makes pinned sections
       // jump on phones) — a real depth parallax instead, tied to the hero's
